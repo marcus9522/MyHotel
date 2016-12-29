@@ -6,13 +6,12 @@
 <link rel="stylesheet" type="text/css" href="css/index.css">
  <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="css/modern-business.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
+    <link rel="stylesheet" type="text/css" href="css/index.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>MyHotel</title>
 </head>
@@ -77,5 +76,23 @@
         interval: 5000 //changes the speed
     })
     </script>
+    <div align=left>
+    <h4>Filtra le camere disponibili</h4>
+    </div>
+    <form action="">
+    <div class=filtracamere align=left>
+    <div align=center><label>TIPOLOGIA:</label>
+		<select name="tipologia">
+         <option value="Singola">Singola</option>
+         <option value="Doppia">Doppia</option>
+	     <option value="Suite">Suite</option>	     
+	     </select><br></div>
+    <div align=center><label>PREZZO MINIMO:</label> 
+		<input name="prezzomin"  type="number" min=0  ><br></div>
+<div align=center><label>PREZZO MASSIMO:</label> 
+		<input name="prezzomax"  type="number" min=0 ><br>
+  <div align=center><input id="cerca" type="submit" value="Cerca"></div></div>
+  </div>
+  </form>
     </body>
 </html>
