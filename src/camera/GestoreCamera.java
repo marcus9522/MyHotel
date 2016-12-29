@@ -8,7 +8,8 @@ import connessione.DriverManagerConnectionPool;
 public class GestoreCamera implements CameraModel {
 	private static final String TABLE_NAME = "camera";
 	@Override
-	public synchronized void insertCamera(CameraBean camera) throws SQLException {
+	public synchronized void insertCamera(CameraBean camera) throws SQLException { 
+		//Metodo per l'inserimento di una nuova camera all'interno del database
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
         String insertSQL = "INSERT INTO" + GestoreCamera.TABLE_NAME + " (NUMEROCAMERA, PREZZO, TIPOLOGIA, FOTO, DESCRIZIONE) VALUES (?, ?, ?, ?, ?)";
@@ -35,6 +36,7 @@ public class GestoreCamera implements CameraModel {
 
 	@Override
 	public synchronized void deleteCamera(int numerocamera) throws SQLException {
+		//Metodo per la cancellazione di una camera dal database tramite la sua chiave primaria
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String deleteSQL = "DELETE FROM " + GestoreCamera.TABLE_NAME + " WHERE NUMEROCAMERA = ?";
@@ -57,6 +59,7 @@ public class GestoreCamera implements CameraModel {
 
 	@Override
 	public synchronized void modifyCamera(CameraBean camera) throws SQLException {
+		//Metodo per la modifica dei dati di una camera gia' esistente all'interno del database
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String updateSQL = "UPDATE " + GestoreCamera.TABLE_NAME + "SET NUMEROCAMERA = ?, PREZZO = ?, TIPOLOGIA = ?, FOTO = ?, DESCRIZIONE = ?" + " WHERE NUMEROCAMERA = ? ";
