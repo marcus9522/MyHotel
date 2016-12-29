@@ -15,7 +15,7 @@ public class GestoreUtente implements UtenteModel {
 	private static final String TABLE_NAME = "utente";
 
 	@Override
-	public void insertUtente(UtenteBean utente) throws SQLException {
+	public synchronized void insertUtente(UtenteBean utente) throws SQLException {
 		// Metodo per l'inserimento di un nuovo utente all'interno del database
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -45,7 +45,7 @@ public class GestoreUtente implements UtenteModel {
 	}
 
 	@Override
-	public void deleteUtente(String email) throws SQLException {
+	public synchronized void deleteUtente(String email) throws SQLException {
 		// Metodo per la cancellazione di un utente presente all'interno del
 		// database tramite la sua chiave primaria
 		Connection connection = null;
@@ -70,7 +70,7 @@ public class GestoreUtente implements UtenteModel {
 	}
 
 	@Override
-	public void modifyUtente(UtenteBean utente) throws SQLException {
+	public synchronized void modifyUtente(UtenteBean utente) throws SQLException {
 		// Metodo per la modifica di un utente presente all'interno del database
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -101,7 +101,7 @@ public class GestoreUtente implements UtenteModel {
 	}
 
 	@Override
-	public UtenteBean getUtente(String email) throws SQLException {
+	public synchronized UtenteBean getUtente(String email) throws SQLException {
 		// Metodo per visualizzare i dati di un utente individuato tramite la
 		// sua chiave primaria
 		Connection connection = null;
@@ -134,7 +134,7 @@ public class GestoreUtente implements UtenteModel {
 	}
 
 	@Override
-	public boolean checkEmail(String email) throws SQLException {
+	public synchronized boolean checkEmail(String email) throws SQLException {
 		// Metodo per verificare se un email è gia presente all'interno della
 		// tabella utenti
 		Connection connection = null;
@@ -173,7 +173,7 @@ public class GestoreUtente implements UtenteModel {
 	}
 
 	@Override
-	public Collection<UtenteBean> getUtenti() throws SQLException {
+	public synchronized Collection<UtenteBean> getUtenti() throws SQLException {
 		// Metodo che restituisce le informazioni di tutti gli utenti presenti
 		// all'interno del database
 		Connection connection = null;
@@ -207,7 +207,7 @@ public class GestoreUtente implements UtenteModel {
 	}
 
 	@Override
-	public String login(String email, String password) throws SQLException {
+	public synchronized String login(String email, String password) throws SQLException {
 		// Metodo che controlla se email e password inserite hanno un riscontro
 		// nel database
 		Connection connection = null;
