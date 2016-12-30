@@ -21,7 +21,7 @@ public class GestoreUtente implements UtenteModel {
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + GestoreUtente.TABLE_NAME
-				+ " (EMAIL, PASSWORD, RUOLO, NOME, COGNOME, DATA_NASCITA,) VALUES (?, ?, ?, ?, ?, ?)";
+				+ " (EMAIL, PASSWORD, RUOLO, NOME, COGNOME, DATA_NASCITA) VALUES (?, ?, ?, ?, ?, ?)";
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
