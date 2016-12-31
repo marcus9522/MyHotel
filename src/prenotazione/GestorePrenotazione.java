@@ -13,7 +13,7 @@ public class GestorePrenotazione implements PrenotazioneModel {
 	private static final String TABLE_NAME = "prenotazione";
 
 	@Override
-	public void insertPrenotazione(PrenotazioneBean prenotazione, int numeroCamera) throws SQLException {
+	public synchronized void insertPrenotazione(PrenotazioneBean prenotazione, int numeroCamera) throws SQLException {
 		// Metodo per l'inserimento di una nuova prenotazione nel database e
 		// della creazione dell'associazione con la relativa camera
 		Connection connection = null;
@@ -47,7 +47,7 @@ public class GestorePrenotazione implements PrenotazioneModel {
 	}
 
 	@Override
-	public void deletePrenotazione(int idPrenotazione) throws SQLException {
+	public synchronized void deletePrenotazione(int idPrenotazione) throws SQLException {
 		// Metodo che elimina una prenotazione all'interno del database
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -71,7 +71,7 @@ public class GestorePrenotazione implements PrenotazioneModel {
 	}
 
 	@Override
-	public PrenotazioneBean getPrenotazione(int idPrenotazione) throws SQLException {
+	public synchronized PrenotazioneBean getPrenotazione(int idPrenotazione) throws SQLException {
 		// Metodo che restituisce i dati di una prenotazione tramite il suo ID
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -102,7 +102,7 @@ public class GestorePrenotazione implements PrenotazioneModel {
 	}
 
 	@Override
-	public Collection<PrenotazioneBean> getPrenotazioni() throws SQLException {
+	public synchronized Collection<PrenotazioneBean> getPrenotazioni() throws SQLException {
 		// Metodo che restituisce tutte le prenotazioni presenti all'interno del
 		// database
 		Connection connection = null;
@@ -122,7 +122,7 @@ public class GestorePrenotazione implements PrenotazioneModel {
 				bean.setDatafine(rs.getDate("DATAFINE"));
 				prenotazioni.add(bean);
 			}
-
+  
 		} finally {
 			try {
 				if (preparedStatement != null)
@@ -134,7 +134,7 @@ public class GestorePrenotazione implements PrenotazioneModel {
 		return prenotazioni;
 	}
 
-	public Collection<PrenotazioneBean> getPrenotazioniUtente(String email) throws SQLException {
+	public synchronized Collection<PrenotazioneBean> getPrenotazioniUtente(String email) throws SQLException {
 		// Metodo che restituisce le prenotazione di un determinato utente
 		// identificato tramite la sua email
 		Connection connection = null;
