@@ -20,7 +20,7 @@
     <p>Filtra le camere disponibili</p>
     </div>
     <form action="">
-    <div class=filtracamere align="center">
+    <div class=filtracamere align=center>
     <div align=center><label>TIPOLOGIA:</label>
 		<select name="tipologia">
          <option value="Singola">Singola</option>

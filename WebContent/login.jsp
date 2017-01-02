@@ -16,18 +16,25 @@
 <title>Login</title>
 </head>
 <body>
+		<img src="foto/LogoA.png" alt="Logo" height="300" width="300">
 <%@ include file="nav.jsp" %>
-<p>Benvenuti nella sezione relativa al login. Una volta effettuato l'accesso
-potrete godere di ogni servizio di questa piattaforma. Grazie per averci scelto! </p>
-
-<form id="login" action=" " method=" ">
-Email:
-<input type="text" name="email" value= "">
-<br>
-Password:
-<input type="text" name="password" value="">
-<br>
-
+<p id="loginP" align=center>Benvenuti nella sezione relativa al login.<br> Una volta effettuato l'accesso
+potrete godere di ogni servizio di questa piattaforma.<br> Grazie per averci scelto! </p>
+<br><br><br>
+<div align="center">
+	<form action="" method=" ">
+		<label><b>Username</b></label>
+    <input type="text" placeholder="Enter email" name="uname" required>
+	<br>
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+     <br>
+    <button type="submit">Login</button>
+    <button type="reset">Reset</button>
 </form>
+</div>
+<br><br>
+<p id="logP" align=center>Se non sei ancora registrato affrettati per usufruire di ogni
+	nostro servizio! <a href="registrazione.jsp">Clicca qui!</a>
 </body>
 </html>
