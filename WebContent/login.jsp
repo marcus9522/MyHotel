@@ -23,11 +23,11 @@ potrete godere di ogni servizio di questa piattaforma.<br> Grazie per averci sce
 <br><br><br>
 <div align="center">
 	<form action="" method=" ">
-		<label><b>Username</b></label>
-    <input type="text" placeholder="Enter email" name="uname" required>
+		<label><b>Email&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b></label>
+    <input id="login" type="text" placeholder="Enter email" name="email" required>
 	<br>
-    <label><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <label><b>Password&nbsp</b></label>
+    <input id="Login" type="password" placeholder="Enter Password" name="password" required>
      <br>
     <button type="submit">Login</button>
     <button type="reset">Reset</button>
