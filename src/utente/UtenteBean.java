@@ -21,8 +21,7 @@ public class UtenteBean {
 		nome = name;
 		cognome = surname;
 		dataNascita = dn;
-		
-		if(role.equalsIgnoreCase("Admin")|| role.equals("Cliente")) ruolo = role;
+		ruolo = role;
 	}
 
 	public String getEmail() {
