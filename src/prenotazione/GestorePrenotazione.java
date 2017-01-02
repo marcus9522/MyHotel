@@ -1,6 +1,7 @@
 package prenotazione;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,23 +19,18 @@ public class GestorePrenotazione implements PrenotazioneModel {
 		// della creazione dell'associazione con la relativa camera
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		PreparedStatement preparedStatement2 = null;
-		String insertrelativaSQL = "INSERT INTO RELATIVA (NUMEROCAMERA,IDPRENOTAZIONE) VALUES (?, ?)";
 		String insertSQL = "INSERT INTO " + GestorePrenotazione.TABLE_NAME
-				+ " (IDPRENOTAZIONE, EMAIL, TOTALE, DATAINIZIO, DATAFINE) VALUES (?, ?, ?, ?, ?)";
+				+ " (IDPRENOTAZIONE, EMAIL, NUMEROCAMERA, TOTALE, DATAINIZIO, DATAFINE) VALUES (?, ?, ?, ?, ?, ?)";
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setInt(1, prenotazione.getIdprenotazione());
 			preparedStatement.setString(2, prenotazione.getEmail());
-			preparedStatement.setDouble(3, prenotazione.getTotale());
-			preparedStatement.setDate(4, prenotazione.getDatainizio());
-			preparedStatement.setDate(5, prenotazione.getDatafine());
+			preparedStatement.setInt(3, prenotazione.getNumerocamera());
+			preparedStatement.setDouble(4, prenotazione.getTotale());
+			preparedStatement.setDate(5, prenotazione.getDatainizio());
+			preparedStatement.setDate(6, prenotazione.getDatafine());
 			preparedStatement.executeUpdate();
-			preparedStatement2 = connection.prepareStatement(insertrelativaSQL);
-			preparedStatement2.setInt(1, numeroCamera);
-			preparedStatement2.setInt(2, prenotazione.getIdprenotazione());
-			preparedStatement2.executeUpdate();
 			// connection.commit();
 		} finally {
 			try {
@@ -85,6 +81,7 @@ public class GestorePrenotazione implements PrenotazioneModel {
 			while (rs.next()) {
 				bean.setIdprenotazione(idPrenotazione);
 				bean.setEmail(rs.getString("EMAIL"));
+				bean.setNumerocamera(rs.getInt("NUMEROCAMERA"));
 				bean.setTotale(rs.getDouble("TOTALE"));
 				bean.setDatainizio(rs.getDate("DATAINIZIO"));
 				bean.setDatafine(rs.getDate("DATAFINE"));
@@ -117,6 +114,7 @@ public class GestorePrenotazione implements PrenotazioneModel {
 				PrenotazioneBean bean = new PrenotazioneBean();
 				bean.setIdprenotazione(rs.getInt("IDPRENOTAZIONE"));
 				bean.setEmail(rs.getString("EMAIL"));
+				bean.setNumerocamera(rs.getInt("NUMEROCAMERA"));
 				bean.setTotale(rs.getDouble("TOTALE"));
 				bean.setDatainizio(rs.getDate("DATAINIZIO"));
 				bean.setDatafine(rs.getDate("DATAFINE"));
@@ -150,6 +148,7 @@ public class GestorePrenotazione implements PrenotazioneModel {
 				PrenotazioneBean bean = new PrenotazioneBean();
 				bean.setIdprenotazione(rs.getInt("IDPRENOTAZIONE"));
 				bean.setEmail(rs.getString("EMAIL"));
+				bean.setNumerocamera(rs.getInt("NUMEROCAMERA"));
 				bean.setTotale(rs.getDouble("TOTALE"));
 				bean.setDatainizio(rs.getDate("DATAINIZIO"));
 				bean.setDatafine(rs.getDate("DATAFINE"));
@@ -165,5 +164,34 @@ public class GestorePrenotazione implements PrenotazioneModel {
 			}
 		}
 		return prenotazioni;
+	}
+
+	@Override
+	public boolean checkDisponibita(int numerocamera, Date datainizio, Date datafine) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String selectSQL = "SELECT * FROM " + GestorePrenotazione.TABLE_NAME + " WHERE NUMEROCAMERA = ? AND DATAINIZIO BETWEEN DATE '?' AND DATE '?' AND DATAFINE BETWEEN DATE '?' AND DATE '?' OR AND DATAFINE BETWEEN DATE '?' AND DATE '?' ";
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, numerocamera);
+			preparedStatement.setDate(2, datainizio);
+			preparedStatement.setDate(3, datafine);
+			preparedStatement.setDate(4, datainizio);
+			preparedStatement.setDate(5, datafine);
+			preparedStatement.setDate(6, datainizio);
+			preparedStatement.setDate(7, datafine);
+			ResultSet rs = preparedStatement.executeQuery();
+			if(rs.first()) return false;
+			else return true;
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
 	}
 }

@@ -3,7 +3,7 @@ package prenotazione;
 import java.sql.Date;
 
 public class PrenotazioneBean {
-	private int idprenotazione;
+	private int idprenotazione,numerocamera;
 	private String email;
 	private double totale;
 	private Date datainizio, datafine;
@@ -12,13 +12,14 @@ public class PrenotazioneBean {
 
 	}
 
-	public PrenotazioneBean(int idprenotazione, String email, double totale, Date datainizio, Date datafine) {
+	public PrenotazioneBean(int idprenotazione, String email, double totale, Date datainizio, Date datafine, int numerocamera) {
 		super();
 		this.idprenotazione = idprenotazione;
 		this.email = email;
 		this.totale = totale;
 		this.datainizio = datainizio;
 		this.datafine = datafine;
+		this.numerocamera = numerocamera;
 	}
 
 	public int getIdprenotazione() {
@@ -60,5 +61,14 @@ public class PrenotazioneBean {
 	public void setDatafine(Date datafine) {
 		this.datafine = datafine;
 	}
+
+	public int getNumerocamera() {
+		return numerocamera;
+	}
+
+	public void setNumerocamera(int numerocamera) {
+		this.numerocamera = numerocamera;
+	}
+	
 
 }
