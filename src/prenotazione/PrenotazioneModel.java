@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 
 public interface PrenotazioneModel {
-	public void insertPrenotazione(PrenotazioneBean prenotazione,int numeroCamera) throws SQLException;
+	public void insertPrenotazione(PrenotazioneBean prenotazione) throws SQLException;
 
 	public void deletePrenotazione(int idPrenotazione) throws SQLException;
 

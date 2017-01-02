@@ -14,7 +14,7 @@ public class GestorePrenotazione implements PrenotazioneModel {
 	private static final String TABLE_NAME = "prenotazione";
 
 	@Override
-	public synchronized void insertPrenotazione(PrenotazioneBean prenotazione, int numeroCamera) throws SQLException {
+	public synchronized void insertPrenotazione(PrenotazioneBean prenotazione) throws SQLException {
 		// Metodo per l'inserimento di una nuova prenotazione nel database e
 		// della creazione dell'associazione con la relativa camera
 		Connection connection = null;
