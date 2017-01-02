@@ -34,7 +34,7 @@ potrete godere di ogni servizio di questa piattaforma.<br> Grazie per averci sce
 </form>
 </div>
 <br><br>
-<p id="logP" align=center>Se non sei ancora registrato affrettati per usufruire di ogni
+<p id="loginP" align=center>Se non sei ancora registrato affrettati per usufruire di ogni
 	nostro servizio! <a href="registrazione.jsp">Clicca qui!</a>
 </body>
 </html>
