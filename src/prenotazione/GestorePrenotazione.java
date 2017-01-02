@@ -170,17 +170,17 @@ public class GestorePrenotazione implements PrenotazioneModel {
 	public boolean checkDisponibita(int numerocamera, Date datainizio, Date datafine) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String selectSQL = "SELECT * FROM " + GestorePrenotazione.TABLE_NAME + " WHERE NUMEROCAMERA = ? AND DATAINIZIO BETWEEN DATE '?' AND DATE '?' AND DATAFINE BETWEEN DATE '?' AND DATE '?' OR AND DATAFINE BETWEEN DATE '?' AND DATE '?' ";
+		String selectSQL = "SELECT * FROM " + GestorePrenotazione.TABLE_NAME + " WHERE (DATAINIZIO BETWEEN DATE '?' AND DATE '?' OR DATAFINE BETWEEN DATE '?' AND DATE '?') OR (DATE '?' BETWEEN DATAINIZIO AND DATAFINE OR DATE '?' BETWEEN DATAINIZIO AND DATAFINE) AND NUMEROCAMERA = ?";
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
-			preparedStatement.setInt(1, numerocamera);
-			preparedStatement.setDate(2, datainizio);
-			preparedStatement.setDate(3, datafine);
-			preparedStatement.setDate(4, datainizio);
-			preparedStatement.setDate(5, datafine);
-			preparedStatement.setDate(6, datainizio);
-			preparedStatement.setDate(7, datafine);
+			preparedStatement.setDate(1, datainizio);
+			preparedStatement.setDate(2, datafine);
+			preparedStatement.setDate(3, datainizio);
+			preparedStatement.setDate(4, datafine);
+			preparedStatement.setDate(5, datainizio);
+			preparedStatement.setDate(6, datafine);
+			preparedStatement.setInt(7, numerocamera);
 			ResultSet rs = preparedStatement.executeQuery();
 			if(rs.first()) return false;
 			else return true;
