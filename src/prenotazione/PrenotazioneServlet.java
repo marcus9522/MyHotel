@@ -53,15 +53,15 @@ public class PrenotazioneServlet extends HttpServlet {
 			try {
 				camerecarrello = gestorecarrello.getCarrelloUtente(email);
 				Iterator<?> it = camerecarrello.iterator();
-				while (it.hasNext()) {
-					String redirectedPage = "";
-					response.sendRedirect(request.getContextPath() + redirectedPage);
+				while (it.hasNext()) {					
 					CarrelloBean camera = (CarrelloBean) it.next();
 					PrenotazioneBean bean = new PrenotazioneBean(idprenotazione, email, camera.getPrezzo(),
-							camera.getDatainizio(), camera.getDatafine(), camera.getNumerocamera());
+					camera.getDatainizio(), camera.getDatafine(), camera.getNumerocamera());
 					gestoreprenotazione.insertPrenotazione(bean);
 					gestorecarrello.deleteCamera(email, camera.getNumerocamera());
 				}
+				String redirectedPage = "";
+				response.sendRedirect(request.getContextPath() + redirectedPage);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
