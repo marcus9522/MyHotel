@@ -7,7 +7,7 @@ import java.util.Collection;
 
 
 public interface CarrelloModel {
-	public void insertCamera(String email, int numerocamera, Date datainizio, Date datafine) throws SQLException;
+	public void insertCamera(String email, int numerocamera, Date datainizio, Date datafine, double prezzo) throws SQLException;
 
 	public void deleteCamera(String email, int numerocamera) throws SQLException;
 

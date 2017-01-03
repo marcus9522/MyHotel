@@ -80,9 +80,10 @@ public class CarrelloServlet extends HttpServlet {
 			int numerocamera = Integer.valueOf(request.getParameter("numerocamera"));
 			Date datainizio = Date.valueOf(request.getParameter("datainizio"));
 			Date datafine = Date.valueOf(request.getParameter("datafine"));
+			double prezzo = Double.valueOf(request.getParameter("prezzo"));
 			try {
 				if (gestoreprenotazione.checkDisponibita(numerocamera, datainizio, datafine)) {
-					gestorecarrello.insertCamera(email, numerocamera, datainizio, datafine);
+					gestorecarrello.insertCamera(email, numerocamera, datainizio, datafine,prezzo);
 					String redirectedPage = "";
 					response.sendRedirect(request.getContextPath() + redirectedPage);
 				} else {

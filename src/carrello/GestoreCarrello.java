@@ -15,18 +15,25 @@ import connessione.DriverManagerConnectionPool;
 public class GestoreCarrello implements CarrelloModel {
 	private static final String TABLE_NAME = "hacarrello";
 	@Override
-	public synchronized void insertCamera(String email, int numerocamera, Date datainizio, Date datafine) throws SQLException {
+	public synchronized void insertCamera(String email, int numerocamera, Date datainizio, Date datafine, double prezzo) throws SQLException {
 		//Metodo che inserice una nuova camera all'interno del carrello con le date di inizio e fine prenotazione
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-        String insertSQL = "INSERT INTO" + GestoreCarrello.TABLE_NAME + " (EMAIL, NUMEROCAMERA, DATAINIZIO, DATAFINE) VALUES (?, ?, ?, ?)";
+		PreparedStatement preparedStatement2 = null;
+		String dateSQL = "SELECT DATEDIFF('?','?') AS DIFF";
+        String insertSQL = "INSERT INTO" + GestoreCarrello.TABLE_NAME + " (EMAIL, NUMEROCAMERA, DATAINIZIO, DATAFINE, PREZZO) VALUES (?, ?, ?, ?, ?)";
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
+			preparedStatement2 = connection.prepareStatement(dateSQL);
             preparedStatement.setString(1, email);
             preparedStatement.setInt(2, numerocamera);
             preparedStatement.setDate(3, datainizio);
             preparedStatement.setDate(4, datafine);
+            preparedStatement2.setDate(1, datafine);
+            preparedStatement2.setDate(2, datainizio);
+            ResultSet rs = preparedStatement2.executeQuery();
+            preparedStatement.setDouble(5, prezzo * rs.getDouble("DIFF"));
 			preparedStatement.executeUpdate();
 
 			//connection.commit();
@@ -107,6 +114,7 @@ public class GestoreCarrello implements CarrelloModel {
 				bean.setNumerocamera(rs.getInt("NUMEROCAMERA"));
 				bean.setDatainizio(rs.getDate("DATAINIZIO"));
 				bean.setDatafine(rs.getDate("DATAFINE"));
+				bean.setPrezzo(rs.getDouble("PREZZO"));
 				carrello.add(bean);
 			}
   
@@ -143,6 +151,8 @@ public class GestoreCarrello implements CarrelloModel {
 			}
 		}
 	}
+	
 
+	
 	}
 
