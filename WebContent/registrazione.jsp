@@ -3,6 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%@ page contentType="text/html; charset=ISO-8859-1" import="java.util.*,utente.UtenteBean"%>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<% String done = (String) request.getAttribute("done");%>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
  <link rel="stylesheet" type="text/css" href="css/index.css">
 <title>Registrazione</title>
@@ -16,24 +19,36 @@ inscritti alla piattaforma e potrete godere di tutti<br>
 i privilegi di essere un cliente di MyHotel!
 </div>
 <div class="registrazione" align=center> 
-<form action="utente?azione=registrati" name="registrazione" method="post">
+<form action="utente?action=registrazione" name="registrazione" method="post">
 <br>
 <h3></h3>
 <label for="email">E-Mail:</label><br> 
-		<input name="email" id="irec" type="text" maxlength="30" required placeholder="Inserisci e-mail" ><br>
+		<input name="email" id="irec" type="text" maxlength="40" required placeholder="Inserisci e-mail" ><br>
 <label for="password">Password:</label><br> 
-		<input name="password" id="irec" type="password" maxlength="15" required placeholder="Inserisci password"><br>
-<label for="ruolo">Ruolo:</label><br> 
-		<input name="ruolo" id="irec" type="text" maxlength="15" required placeholder="Inserisci il tuo ruolo"><br>
+		<input name="password" id="irec" type="password" maxlength="20" required placeholder="Inserisci password"><br>
+		<input name="ruolo" id="irec" type="text" required value="normale" hidden="true">
 <label for="nome">Nome:</label><br> 
-		<input name="nome" id="irec" type="text" maxlength="15" required placeholder="Inserisci il tuo nome"><br>
+		<input name="nome" id="irec" type="text" maxlength="20" required placeholder="Inserisci il tuo nome"><br>
 <label for="cognome">Cognome:</label><br> 
-		<input cognome="cognome" id="irec" type="text" maxlength="15" required placeholder="Inserisci il tuo cognome"><br>
+		<input name="cognome" id="irec" type="text" maxlength="20" required placeholder="Inserisci il tuo cognome"><br>
 <label for="data">Data Di Nascita</label><br>
-<input name="data" id="irec" type="date" max="<%=new java.sql.Date(System.currentTimeMillis()) %>" required ><br>		
+<input name="datanascita" id="irec" type="date" max="<%=new java.sql.Date(System.currentTimeMillis()) %>" required ><br>		
 		<p></p>
    <input id="registra" type="submit" value="Invia">
   <input id="registra" type ="reset" value="Reset"/>	 
   </form>
 </div>
+<%if(done!=null){ 
+if(done.equalsIgnoreCase("no")){%>
+<script>
+alert("Email già presente nel database")
+history.go(-1);
+</script>
+<%} %>
+<% if(done.equalsIgnoreCase("yes")){%>
+<script>
+alert("Registrazione effettuata")
+</script> 
+<%}
+   }  %>
 </html>
