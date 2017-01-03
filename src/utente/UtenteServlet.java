@@ -73,12 +73,12 @@ public class UtenteServlet extends HttpServlet {
 			if ((email != null) && (password != null)) {
 				try {
 					if (gestoreutente.login(email, password).equals("true")) {
-						String redirectedPage = "/indexprotected.jsp";
+						String redirectedPage = "/index.jsp";
 						response.sendRedirect(request.getContextPath() + redirectedPage);
 						request.getSession().setAttribute("ruolo", "user");
 						request.getSession().setAttribute("email", email);
 					} else if (gestoreutente.login(email, password).equals("admin")) {
-						String redirectedPage = "/indexprotectedadmin.jsp";
+						String redirectedPage = "/index.jsp";
 						response.sendRedirect(request.getContextPath() + redirectedPage);
 						request.getSession().setAttribute("ruolo", "admin");
 						request.getSession().setAttribute("email", email);
@@ -96,7 +96,7 @@ public class UtenteServlet extends HttpServlet {
 		if (action.equalsIgnoreCase("logout")) {
 			request.getSession().removeAttribute("ruolo");
 			request.getSession().invalidate();
-			String redirectedPage = "/product";
+			String redirectedPage = "/index.jsp";
 			response.sendRedirect(request.getContextPath() + redirectedPage);
 		}
 		if (action.equalsIgnoreCase("update")) {
