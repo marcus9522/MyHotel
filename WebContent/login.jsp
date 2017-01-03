@@ -15,7 +15,7 @@
 <title>Login</title>
 </head>
 <body>
-		<img src="foto/LogoA.png" alt="Logo" height="300" width="300">
+		<img src="foto/LogoA.png" alt="Logo" height="200" width="200">
 <%@ include file="nav.jsp" %>
 <p id="loginP" align=center>Benvenuti nella sezione relativa al login.<br> Una volta effettuato l'accesso
 potrete godere di ogni servizio di questa piattaforma.<br> Grazie per averci scelto! </p>
@@ -34,6 +34,6 @@ potrete godere di ogni servizio di questa piattaforma.<br> Grazie per averci sce
 </div>
 <br><br>
 <p id="loginP" align=center>Se non sei ancora registrato affrettati per usufruire di ogni
-	nostro servizio! <a href="registrazione.jsp">Clicca qui!</a>
+	nostro servizio! <a href="registrazione.jsp">Clicca qui!</a></p>
 </body>
 </html>
