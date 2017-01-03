@@ -37,7 +37,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="http://localhost:8080/FarmaciaAmica/product2">Home</a>
+                <a class="navbar-brand" href="index.jsp">Home</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -52,7 +52,7 @@
                         <a href="login.jsp">AreaUtente</a>
                     </li>
                     <li>
-                        <a href="registrazione.jsp">Logout</a>
+                        <a href="utente?action=logout">Logout</a>
                     </li>
                     </ul>
                     </div>

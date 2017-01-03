@@ -3,6 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%@ page contentType="text/html; charset=ISO-8859-1" import="java.util.*"%>
+<% String done = (String) request.getAttribute("done");%>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
     <!-- Custom CSS -->
@@ -21,7 +23,7 @@
 potrete godere di ogni servizio di questa piattaforma.<br> Grazie per averci scelto! </p>
 <br><br><br>
 <div align="center">
-	<form action="" method=" ">
+	<form action="utente?action=login" method="post">
 		<label><b>Email&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b></label>
     <input id="login" type="text" placeholder="Enter email" name="email" required>
 	<br>
@@ -36,4 +38,12 @@ potrete godere di ogni servizio di questa piattaforma.<br> Grazie per averci sce
 <p id="loginP" align=center>Se non sei ancora registrato affrettati per usufruire di ogni
 	nostro servizio! <a href="registrazione.jsp">Clicca qui!</a></p>
 </body>
+<%done=request.getParameter("done"); %>
+<%if(done!=null){ 
+if(done.equalsIgnoreCase("no")){%>
+<script>
+alert("Email e/o password errati")
+history.go(-1)
+</script>
+<%} } %>
 </html>

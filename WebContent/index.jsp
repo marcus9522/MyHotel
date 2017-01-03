@@ -3,6 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%@ page contentType="text/html; charset=ISO-8859-1" import="java.util.*,utente.UtenteBean"%>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<%String ruolo= (String) session.getAttribute("ruolo");%>
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>MyHotel</title>
@@ -14,7 +17,15 @@
 						utilizzato. </span>
 	
 </header>
+<%if(ruolo==null){%>
 <%@ include file="nav.jsp" %>
+<%} 
+ else if(ruolo.equals("user")){%>
+<%@ include file="navprotected.jsp" %>
+<%} 
+ else if(ruolo.equals("admin")){%>
+<%@ include file="navadmin.jsp" %>
+<%}  %>
  
     <div id="filtro" align="center">
     <p>Filtra le camere disponibili</p>
