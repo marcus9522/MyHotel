@@ -30,6 +30,10 @@
     <servlet-name>CarrelloServlet</servlet-name>
     <servlet-class>carrello.CarrelloServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>PrenotazioneServlet</servlet-name>
+    <servlet-class>prenotazione.PrenotazioneServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>UtenteServlet</servlet-name>
     <url-pattern>/utente</url-pattern>
@@ -41,5 +45,9 @@
   <servlet-mapping>
     <servlet-name>CarrelloServlet</servlet-name>
     <url-pattern>/carrello</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PrenotazioneServlet</servlet-name>
+    <url-pattern>/prenotazione</url-pattern>
   </servlet-mapping>
 </web-app>
