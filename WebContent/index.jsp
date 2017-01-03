@@ -34,14 +34,20 @@
     <div class=filtracamere align=center>
     <div align=center><label>TIPOLOGIA:</label>
 		<select name="tipologia">
+		<option value="Tutte">Tutte</option>
          <option value="Singola">Singola</option>
          <option value="Doppia">Doppia</option>
 	     <option value="Suite">Suite</option>	     
 	     </select><br></div>
-    <div align=center><label>PREZZO MINIMO:</label> 
-		<input name="prezzomin"  type="number" min=0  ><br></div>
+    <div align=center><label>PREZZO MINIMO:&nbsp&nbsp&nbsp</label> 
+		<input name="min"  type="number" min=0  ><br></div>
 <div align=center><label>PREZZO MASSIMO:</label> 
-		<input name="prezzomax"  type="number" min=0 ><br>
+		<input name="max"  type="number" min=0 ><br>
+		<div align=center><label>ORDINA PER:</label>
+		<select name="order">
+		<option value="prezzo">Prezzo</option>
+         <option value="tipologia">Tipologia</option>     
+	     </select><br></div>
   <div align=center><input id="cerca" type="submit" value="Cerca"></div></div>
   </div>
   </form>
