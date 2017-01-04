@@ -49,7 +49,7 @@
                         <a href="product?action=prodotti">Catalogo</a>
                     </li>
                     <li>
-                        <a href="login.jsp">AreaUtente</a>
+                        <a href="areautente.jsp">AreaUtente</a>
                     </li>
                     <li>
                         <a href="utente?action=logout">Logout</a>
