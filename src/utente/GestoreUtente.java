@@ -77,6 +77,8 @@ public class GestoreUtente implements UtenteModel {
 		String updateSQL = " UPDATE " + GestoreUtente.TABLE_NAME
 				+ " SET EMAIL = ?, PASSWORD = ?, RUOLO = ?, NOME = ?, COGNOME = ?, DATA_NASCITA = ?"
 				+ " WHERE EMAIL = ? ";
+		System.out.println(updateSQL);
+		System.out.println(utente.getPassword());
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);

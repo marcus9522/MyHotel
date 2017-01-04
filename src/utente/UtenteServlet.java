@@ -100,7 +100,7 @@ public class UtenteServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + redirectedPage);
 		}
 		if (action.equalsIgnoreCase("update")) {
-			String email = request.getParameter("email");
+			String email = (String) request.getSession().getAttribute("email");
 			String password = request.getParameter("password");
 			String ruolo = request.getParameter("ruolo");
 			String nome = request.getParameter("nome");
@@ -108,11 +108,11 @@ public class UtenteServlet extends HttpServlet {
 			Date data_nascita = Date.valueOf(request.getParameter("datanascita"));
 			UtenteBean bean = new UtenteBean(email, password, nome, cognome, data_nascita, ruolo);
 			try {
-				if (request.getSession().getAttribute("enter").equals("user")) {
-					String redirectedPage = "";
+				if (request.getSession().getAttribute("ruolo").equals("user")) {
+					String redirectedPage = "/areautente.jsp?esito=yes";
 					response.sendRedirect(request.getContextPath() + redirectedPage);
-					gestoreutente.modifyUtente(bean);
-				} else if (request.getSession().getAttribute("enter").equals("admin")) {
+					gestoreutente.modifyUtente(bean);					
+				} else if (request.getSession().getAttribute("ruolo").equals("admin")) {
 					String redirectedPage = "";
 					response.sendRedirect(request.getContextPath() + redirectedPage);
 					gestoreutente.modifyUtente(bean);
@@ -123,13 +123,14 @@ public class UtenteServlet extends HttpServlet {
 			}
 		}
 		if (action.equalsIgnoreCase("delete")) {
-			String email = request.getParameter("email");
+			String email = (String) request.getSession().getAttribute("email");
 			try {
-				if (request.getSession().getAttribute("enter").equals("user")) {
-					String redirectedPage = "";
+				if (request.getSession().getAttribute("ruolo").equals("user")) {
+					String redirectedPage = "/index.jsp";
+					request.getSession().invalidate();
 					response.sendRedirect(request.getContextPath() + redirectedPage);
 					gestoreutente.deleteUtente(email);
-				} else if (request.getSession().getAttribute("enter").equals("admin")) {
+				} else if (request.getSession().getAttribute("ruolo").equals("admin")) {
 					String redirectedPage = "";
 					response.sendRedirect(request.getContextPath() + redirectedPage);
 					gestoreutente.deleteUtente(email);
@@ -160,7 +161,7 @@ public class UtenteServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			RequestDispatcher dispatcher2 = getServletContext().getRequestDispatcher("/datiutente.jsp?email=" + email);
+			RequestDispatcher dispatcher2 = getServletContext().getRequestDispatcher("/modificadati.jsp");
 			dispatcher2.forward(request, response);
 		}
 
