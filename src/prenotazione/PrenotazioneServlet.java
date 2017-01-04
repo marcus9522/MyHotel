@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import camera.CameraBean;
+import camera.VisualizzatoreCamera;
+import camera.VisualizzatoreCameraModel;
 import carrello.CarrelloModel;
 import carrello.GestoreCarrello;
 import carrello.CarrelloBean;
@@ -20,9 +23,12 @@ public class PrenotazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	static PrenotazioneModel gestoreprenotazione;
 	static CarrelloModel gestorecarrello;
+	static VisualizzatoreCameraModel visualizzatorecamera;
 	static {
 		gestoreprenotazione = new GestorePrenotazione();
 		gestorecarrello = new GestoreCarrello();
+		visualizzatorecamera = new VisualizzatoreCamera();
+
 	}
 
 	public PrenotazioneServlet() {
@@ -36,7 +42,7 @@ public class PrenotazioneServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+            doPost(request,response);
 	}
 
 	/**
@@ -105,14 +111,22 @@ public class PrenotazioneServlet extends HttpServlet {
 		}
 		if (action.equalsIgnoreCase("getprenotazioniuser")) {
 			request.removeAttribute("prenotazioni");
+			request.removeAttribute("camere");
 			String email = (String) request.getSession().getAttribute("email");
+			Collection<PrenotazioneBean> prenotazioni = new LinkedList<PrenotazioneBean>();
+			Collection<CameraBean> camere = new LinkedList<CameraBean>();
 			try {
-				request.setAttribute("prenotazioni", gestoreprenotazione.getPrenotazioniUtente(email));
+				prenotazioni = gestoreprenotazione.getPrenotazioniUtente(email);
+				request.setAttribute("prenotazioni", prenotazioni );
+				for (PrenotazioneBean p : prenotazioni){
+				camere.add(visualizzatorecamera.getCamera(p.getNumerocamera()));}
+				request.setAttribute("camere", camere );
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/prenotazioniutente.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
