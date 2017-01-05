@@ -49,7 +49,7 @@ public class GestoreServizi implements ServizioModel {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		Collection<ServizioBean> servizi = new LinkedList<ServizioBean>();
-		String selectSQL = "SELECT * FROM " + GestoreServizi.TABLE_NAME2 + " WHERE NUMEROCAMERA = ? ";
+		String selectSQL = "SELECT " + GestoreServizi.TABLE_NAME + ".* FROM " + GestoreServizi.TABLE_NAME + "," + GestoreServizi.TABLE_NAME2 + " WHERE NUMEROCAMERA = ? AND " + GestoreServizi.TABLE_NAME + ".NOMESERVIZIO = " + GestoreServizi.TABLE_NAME2 + ".NOMESERVIZIO";
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
@@ -57,7 +57,7 @@ public class GestoreServizi implements ServizioModel {
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				ServizioBean bean = new ServizioBean();
-				bean.setNome(rs.getString("NOME"));
+				bean.setNome(rs.getString("NOMESERVIZIO"));
 				bean.setDescrizione(rs.getString("DESCRIZIONE"));
 				servizi.add(bean);
 			}

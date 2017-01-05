@@ -50,6 +50,7 @@ public class CameraServlet extends HttpServlet {
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("");
 			dispatcher.forward(request, response);
 		}
+		doPost(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -108,7 +109,7 @@ public class CameraServlet extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/camera.jsp");
 			dispatcher.forward(request, response);
 		}
 		if (action.equalsIgnoreCase("filtra")){
