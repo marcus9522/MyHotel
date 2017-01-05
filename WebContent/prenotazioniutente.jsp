@@ -47,7 +47,7 @@ Collection<?> prenotazioni = (Collection<?>) request.getAttribute("prenotazioni"
 					
 					<div class="col-md-4 text-center">
 	                <div class="thumbnail">
-	                <a href="product?action=prodotto&nomeProdotto=<%=camera.getNumeroCamera()%>">
+	                <a href="camera?action=getcamera&numerocamera=<%=camera.getNumeroCamera()%>">
 	                    <img class="img-responsive" src="<%=camera.getImmagine()%>" alt="">
 	                    </a>
 	                    <div class="caption">
@@ -59,8 +59,9 @@ Collection<?> prenotazioni = (Collection<?>) request.getAttribute("prenotazioni"
 	                    </div>
 	                </div>
 	            </div>
-	            <%} }%>
-
+	            <%} } else{ %>
+              <div align="center"><h1>NESSUNA PRENOTAZIONE EFFETTUATA</h1></div>
+              <%} %>
         <hr>
       
 
