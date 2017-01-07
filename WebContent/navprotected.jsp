@@ -52,6 +52,9 @@
                         <a href="areautente.jsp">AreaUtente</a>
                     </li>
                     <li>
+                        <a href="carrello?action=getcarrello">Carrello</a>
+                    </li>
+                    <li>
                         <a href="utente?action=logout">Logout</a>
                     </li>
                     </ul>
