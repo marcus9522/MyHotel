@@ -28,6 +28,7 @@ Collection<?> servizi = (Collection<?>) request.getAttribute("servizi");%>
     <link href="css/modern-business.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
+    <link rel="stylesheet" type="text/css" href="css/index.css">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
