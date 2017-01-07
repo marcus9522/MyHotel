@@ -54,6 +54,7 @@ Collection<?> prenotazioni = (Collection<?>) request.getAttribute("prenotazioni"
 	                    </a>
 	                    <div class="caption">
 	                        <h3><%=camera.getTipologia()%><br>
+	                        <small>Id Prenotazione: <%=prenotazione.getIdprenotazione() %></small>
 	                        </h3>
 	                        <p>Prenotata dal : <%=prenotazione.getDatainizio() %></p>
 	                        <p>Al : <%=prenotazione.getDatafine() %></p>

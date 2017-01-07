@@ -15,13 +15,13 @@ import connessione.DriverManagerConnectionPool;
 public class GestoreCarrello implements CarrelloModel {
 	private static final String TABLE_NAME = "hacarrello";
 	@Override
-	public synchronized void insertCamera(String email, int numerocamera, Date datainizio, Date datafine, double prezzo) throws SQLException {
+	public synchronized void insertCamera(String email, int numerocamera, Date datainizio, Date datafine, double totale) throws SQLException {
 		//Metodo che inserice una nuova camera all'interno del carrello con le date di inizio e fine prenotazione
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		PreparedStatement preparedStatement2 = null;
-		String dateSQL = "SELECT DATEDIFF('?','?') AS DIFF";
-        String insertSQL = "INSERT INTO" + GestoreCarrello.TABLE_NAME + " (EMAIL, NUMEROCAMERA, DATAINIZIO, DATAFINE, PREZZO) VALUES (?, ?, ?, ?, ?)";
+		String dateSQL = "SELECT DATEDIFF(?,?) AS DIFF";
+        String insertSQL = "INSERT INTO " + GestoreCarrello.TABLE_NAME + " (EMAIL, NUMEROCAMERA, DATAINIZIO, DATAFINE, TOTALE) VALUES (?, ?, ?, ?, ?)";
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
@@ -33,7 +33,9 @@ public class GestoreCarrello implements CarrelloModel {
             preparedStatement2.setDate(1, datafine);
             preparedStatement2.setDate(2, datainizio);
             ResultSet rs = preparedStatement2.executeQuery();
-            preparedStatement.setDouble(5, prezzo * rs.getDouble("DIFF"));
+            while (rs.next()) {
+                preparedStatement.setDouble(5, totale * rs.getDouble("DIFF"));
+			}
 			preparedStatement.executeUpdate();
 
 			//connection.commit();
@@ -81,6 +83,7 @@ public class GestoreCarrello implements CarrelloModel {
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1, email);
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				idcamere.add(rs.getInt("NUMEROCAMERA"));
@@ -107,6 +110,7 @@ public class GestoreCarrello implements CarrelloModel {
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1, email);
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				CarrelloBean bean = new CarrelloBean();
@@ -114,7 +118,7 @@ public class GestoreCarrello implements CarrelloModel {
 				bean.setNumerocamera(rs.getInt("NUMEROCAMERA"));
 				bean.setDatainizio(rs.getDate("DATAINIZIO"));
 				bean.setDatafine(rs.getDate("DATAFINE"));
-				bean.setPrezzo(rs.getDouble("PREZZO"));
+				bean.setTotale(rs.getDouble("TOTALE"));
 				carrello.add(bean);
 			}
   

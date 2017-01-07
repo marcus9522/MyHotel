@@ -20,16 +20,15 @@ public class GestorePrenotazione implements PrenotazioneModel {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String insertSQL = "INSERT INTO " + GestorePrenotazione.TABLE_NAME
-				+ " (IDPRENOTAZIONE, EMAIL, NUMEROCAMERA, TOTALE, DATAINIZIO, DATAFINE) VALUES (?, ?, ?, ?, ?, ?)";
+				+ " (EMAIL, NUMEROCAMERA, TOTALE, DATAINIZIO, DATAFINE) VALUES (?, ?, ?, ?, ?)";
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
-			preparedStatement.setInt(1, prenotazione.getIdprenotazione());
-			preparedStatement.setString(2, prenotazione.getEmail());
-			preparedStatement.setInt(3, prenotazione.getNumerocamera());
-			preparedStatement.setDouble(4, prenotazione.getTotale());
-			preparedStatement.setDate(5, prenotazione.getDatainizio());
-			preparedStatement.setDate(6, prenotazione.getDatafine());
+			preparedStatement.setString(1, prenotazione.getEmail());
+			preparedStatement.setInt(2, prenotazione.getNumerocamera());
+			preparedStatement.setDouble(3, prenotazione.getTotale());
+			preparedStatement.setDate(4, prenotazione.getDatainizio());
+			preparedStatement.setDate(5, prenotazione.getDatafine());
 			preparedStatement.executeUpdate();
 			// connection.commit();
 		} finally {
@@ -170,7 +169,7 @@ public class GestorePrenotazione implements PrenotazioneModel {
 	public boolean checkDisponibita(int numerocamera, Date datainizio, Date datafine) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String selectSQL = "SELECT * FROM " + GestorePrenotazione.TABLE_NAME + " WHERE (DATAINIZIO BETWEEN DATE '?' AND DATE '?' OR DATAFINE BETWEEN DATE '?' AND DATE '?') OR (DATE '?' BETWEEN DATAINIZIO AND DATAFINE OR DATE '?' BETWEEN DATAINIZIO AND DATAFINE) AND NUMEROCAMERA = ?";
+		String selectSQL = "SELECT * FROM " + GestorePrenotazione.TABLE_NAME + " WHERE (DATAINIZIO BETWEEN DATE ? AND DATE ? OR DATAFINE BETWEEN DATE ? AND DATE ?) OR (DATE ? BETWEEN DATAINIZIO AND DATAFINE OR DATE ? BETWEEN DATAINIZIO AND DATAFINE) AND NUMEROCAMERA = ?";
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);

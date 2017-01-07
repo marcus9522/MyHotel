@@ -6,17 +6,17 @@ public class CarrelloBean {
 	private Date datainizio, datafine;
 	private String email;
 	private int numerocamera;
-    private double prezzo;
+    private double totale;
 	public CarrelloBean() {
 	}
 
-	public CarrelloBean(Date datainizio, Date datafine, String email, int numerocamera,double prezzo) {
+	public CarrelloBean(Date datainizio, Date datafine, String email, int numerocamera,double totale) {
 		super();
 		this.datainizio = datainizio;
 		this.datafine = datafine;
 		this.email = email;
 		this.numerocamera = numerocamera;
-		this.prezzo = prezzo;
+		this.totale = totale;
 	}
 
 	public Date getDatainizio() {
@@ -51,12 +51,12 @@ public class CarrelloBean {
 		this.numerocamera = numerocamera;
 	}
 
-	public double getPrezzo() {
-		return prezzo;
+	public double getTotale() {
+		return totale;
 	}
 
-	public void setPrezzo(double prezzo) {
-		this.prezzo = prezzo;
+	public void setTotale(double totale) {
+		this.totale = totale;
 	}
 
 }

@@ -36,7 +36,7 @@ FOREIGN KEY(nomeservizio) REFERENCES servizio(nomeservizio) ON DELETE CASCADE ON
 );
 
 CREATE TABLE prenotazione (
-idprenotazione int not null,
+idprenotazione int not null auto_increment,
 email varchar(40) not null,
 numerocamera int not null,
 totale double not null,
@@ -68,6 +68,10 @@ Insert into utente(email, password, ruolo, nome, cognome, data_nascita)
     Values('alecriscuolo@alice.it', 'lovenapoli', 'normale', 'Alessandro', 'Criscuolo', '1995-06-24');
 Insert into utente(email, password, ruolo, nome, cognome, data_nascita)
     Values('gianlucacriscuolo@alice.it', 'glovenapoli', 'normale', 'Gianluca', 'Criscuolo', '1989-05-14');
+    Insert into utente(email, password, ruolo, nome, cognome, data_nascita)
+    Values('email', 'password', 'normale', 'Gianluca', 'Criscuolo', '1989-05-14');
+    Insert into utente(email, password, ruolo, nome, cognome, data_nascita)
+    Values('email2', 'password2', 'amministratore', 'Gianluca', 'Criscuolo', '1989-05-14');
 Insert into camera(numerocamera, prezzo, tipologia, immagine, descrizione)
     Values('24', '250.25', 'Doppia', 'http://www.hotelgalileopadova.it/resources/images/9d880762-0f9b-42e7-9379-d64e90526f10/it/B/camere-a-padova.jpg', 'Camera doppia,televisore, bagno con doccia e yacuzzi.');
 Insert into servizio(nomeservizio, descrizione)

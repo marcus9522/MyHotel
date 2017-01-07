@@ -46,26 +46,7 @@ public class CarrelloServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String action = request.getParameter("action");
-		if (action.equalsIgnoreCase("getcarrello")) {
-			request.removeAttribute("carrello");
-			request.removeAttribute("camere");
-			ArrayList<Integer> idcamere = new ArrayList<Integer>();
-			Collection<CameraBean> camere = new LinkedList<CameraBean>();
-			String email = (String) request.getSession().getAttribute("email");
-			try {
-				request.setAttribute("carrello", gestorecarrello.getCarrelloUtente(email));
-				idcamere = gestorecarrello.getIdCamereCarrello(email);
-				for (int c : idcamere)
-					camere.add(visualizzatorecamera.getCamera(c));
-				request.setAttribute("camere", camere);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("");
-			dispatcher.forward(request, response);
-		}
+		doPost(request,response);
 	}
 
 	/**
@@ -84,10 +65,10 @@ public class CarrelloServlet extends HttpServlet {
 			try {
 				if (gestoreprenotazione.checkDisponibita(numerocamera, datainizio, datafine)) {
 					gestorecarrello.insertCamera(email, numerocamera, datainizio, datafine,prezzo);
-					String redirectedPage = "";
+					String redirectedPage = "/camera?action=getcamera&numerocamera="+numerocamera+"&add=yes";
 					response.sendRedirect(request.getContextPath() + redirectedPage);
 				} else {
-					String redirectedPage = "";
+					String redirectedPage = "/camera?action=getcamera&numerocamera="+numerocamera+"&add=no";
 					response.sendRedirect(request.getContextPath() + redirectedPage);
 				}
 			} catch (SQLException e) {
@@ -100,7 +81,7 @@ public class CarrelloServlet extends HttpServlet {
 			int numerocamera = Integer.valueOf(request.getParameter("numerocamera"));
 			try {
 				gestorecarrello.deleteCamera(email, numerocamera);
-				String redirectedPage = "";
+				String redirectedPage = "/carrello.jsp";
 				response.sendRedirect(request.getContextPath() + redirectedPage);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -111,12 +92,31 @@ public class CarrelloServlet extends HttpServlet {
 			String email = (String) request.getSession().getAttribute("email");
 			try {
 				gestorecarrello.emptyCarrello(email);
-				String redirectedPage = "";
+				String redirectedPage = "/carrello.jsp";
 				response.sendRedirect(request.getContextPath() + redirectedPage);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		if (action.equalsIgnoreCase("getcarrello")) {
+			request.removeAttribute("carrello");
+			request.removeAttribute("camere");
+			ArrayList<Integer> idcamere = new ArrayList<Integer>();
+			Collection<CameraBean> camere = new LinkedList<CameraBean>();
+			String email = (String) request.getSession().getAttribute("email");
+			try {
+				request.setAttribute("carrello", gestorecarrello.getCarrelloUtente(email));
+				idcamere = gestorecarrello.getIdCamereCarrello(email);
+				for (int c : idcamere)
+					camere.add(visualizzatorecamera.getCamera(c));
+				request.setAttribute("camere", camere);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/carrello.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 
