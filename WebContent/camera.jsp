@@ -34,7 +34,8 @@ Collection<?> servizi = (Collection<?>) request.getAttribute("servizi");%>
 <body>
 <script type="text/javascript">
 var site = window.location.href
-if(site.indexOf("add=yes")!=-1) {alert("Prodotto aggiunto al carrello")}
+if(site.indexOf("add=yes")!=-1) {alert("Camera aggiunta al carrello")}
+if(site.indexOf("add=no")!=-1) {alert("Camera non disponiblie nel periodo stabilito")}
 </script>
 <%if(ruolo==null){%>
 <%@ include file="nav.jsp" %>
@@ -60,7 +61,7 @@ if(site.indexOf("add=yes")!=-1) {alert("Prodotto aggiunto al carrello")}
         <!-- Intro Content -->
         <div class="row">
             <div class="col-md-6">
-                <img class="img-responsive" src="<%= camera.getImmagine() %>" alt="">
+                <img class="img-responsive" src="<%= camera.getImmagine() %>" >
             </div>
             <div class="col-md-6">
                 <h2><%= camera.getTipologia()%></h2>
@@ -71,19 +72,22 @@ if(site.indexOf("add=yes")!=-1) {alert("Prodotto aggiunto al carrello")}
             <%if (ruolo==null) {%>
 	                    <div align="center"><a href="/login.jsp"><button>Effettua Il Login Per Prenotare Questa Camera</button></a></div>
 	                    <%}else if (ruolo.equals("user")){  %>
-	                    <form action="" method = "post">
+	                    <form action="carrello?action=insert" method = "post">
 	                    <label for="data">DATA INIZIO PRENOTAZIONE:</label> 
 		                <input name="datainizio" type="date" value =<%=new java.sql.Date(System.currentTimeMillis()) %>   required ><br>			
 		                <label for="data">DATA FINE PRENOTAZIONE:</label> 
-		                <input name="datafine" type="date" required ><br>			
-		                </form>
+		                <input name="datafine" type="date" required ><br>
+		                <input name="numerocamera" type="number" value=<%=camera.getNumeroCamera() %> hidden="yes" >				
+		                <input name="prezzo" type="number" value=<%=camera.getPrezzo() %> hidden="yes" >
 		                <label for ="servizi">SERVIZI DISPONIBILI:</label><br>
 		                <% Iterator<?> it = servizi.iterator();
 		                while (it.hasNext()) {
 					ServizioBean servizio = (ServizioBean) it.next();%>
-					<input type="checkbox" name="servizio" value= "<%=servizio.getNome()%>"><%=servizio.getNome() %>
+					<input type="checkbox" name="servizio" value= "<%=servizio.getNome()%>"><%=servizio.getNome().toUpperCase() %>
 					<%} %>
-	                    <div align="center"><a href="login.jsp"><button>Effettua Prenotazione</button></a></div>
+					<br>
+					<input id="aggiungi" type="submit" value="Aggiungi al Carrello">
+					</form>
 	                    <%} else if(ruolo.equals("admin")){ %>
 	                    <%} %>
         </div>
