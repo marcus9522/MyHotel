@@ -53,7 +53,7 @@ public class PrenotazioneServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String action = request.getParameter("action");
 		if (action.equalsIgnoreCase("insert")) {
-			int idprenotazione = Integer.valueOf(request.getParameter("idprenotazione"));
+			//int idprenotazione = Integer.valueOf(request.getParameter("idprenotazione"));
 			String email = (String) request.getSession().getAttribute("email");
 			Collection<CarrelloBean> camerecarrello = new LinkedList<CarrelloBean>();
 			try {
@@ -61,7 +61,7 @@ public class PrenotazioneServlet extends HttpServlet {
 				Iterator<?> it = camerecarrello.iterator();
 				while (it.hasNext()) {					
 					CarrelloBean camera = (CarrelloBean) it.next();
-					PrenotazioneBean bean = new PrenotazioneBean(idprenotazione, email, camera.getPrezzo(),
+					PrenotazioneBean bean = new PrenotazioneBean(0, email, camera.getTotale(),
 					camera.getDatainizio(), camera.getDatafine(), camera.getNumerocamera());
 					gestoreprenotazione.insertPrenotazione(bean);
 					gestorecarrello.deleteCamera(email, camera.getNumerocamera());
