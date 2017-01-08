@@ -47,7 +47,7 @@ public class CameraServlet extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/catalogo.jsp");
 			dispatcher.forward(request, response);
 		}
 		doPost(request,response);
@@ -124,7 +124,7 @@ public class CameraServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/catalogo.jsp");
 			dispatcher.forward(request, response);
 		}
 		if(action.equalsIgnoreCase("getServizi")){
