@@ -47,7 +47,7 @@
                         <a href="about.jsp">Info</a>
                     </li>
                     <li>
-                        <a href="catalogo.jsp">Catalogo</a>
+                        <a href="camera?action=getcamere">Catalogo</a>
                     </li>
                     <li>
                         <a href="login.jsp">Login</a>
