@@ -46,7 +46,7 @@
                         <a href="about.jsp">Info</a>
                     </li>
                     <li>
-                        <a href="product?action=prodotti">Catalogo</a>
+                        <a href="catalogo.jsp">Catalogo</a>
                     </li>
                     <li>
                         <a href="login.jsp">Area Amministratore</a>
