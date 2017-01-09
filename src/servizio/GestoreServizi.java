@@ -26,7 +26,7 @@ public class GestoreServizi implements ServizioModel {
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				ServizioBean bean = new ServizioBean();
-				bean.setNome(rs.getString("NOME"));
+				bean.setNome(rs.getString("NOMESERVIZIO"));
 				bean.setDescrizione(rs.getString("DESCRIZIONE"));
 				servizi.add(bean);
 			}
@@ -85,13 +85,8 @@ public class GestoreServizi implements ServizioModel {
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setInt(1, numerocamera);
 			preparedStatement.setString(2, nomeservizio);
-			ResultSet rs = preparedStatement.executeQuery();
-			while (rs.next()) {
-				ServizioBean bean = new ServizioBean();
-				bean.setNome(rs.getString("NOME"));
-				bean.setDescrizione(rs.getString("DESCRIZIONE"));
-			}
-
+			preparedStatement.executeUpdate();
+			
 		} finally {
 			try {
 				if (preparedStatement != null)
