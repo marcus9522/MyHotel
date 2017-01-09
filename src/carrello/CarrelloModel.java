@@ -16,5 +16,6 @@ public interface CarrelloModel {
 	public Collection<CarrelloBean> getCarrelloUtente(String email) throws SQLException;
 	
 	public void emptyCarrello(String email) throws SQLException;
+	
 
 }

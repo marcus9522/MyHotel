@@ -62,6 +62,11 @@ public class CarrelloServlet extends HttpServlet {
 			Date datainizio = Date.valueOf(request.getParameter("datainizio"));
 			Date datafine = Date.valueOf(request.getParameter("datafine"));
 			double prezzo = Double.valueOf(request.getParameter("prezzo"));
+			if(datainizio.equals(datafine)){
+				String redirectedPage = "/camera?action=getcamera&numerocamera="+numerocamera+"&error=yes";
+				response.sendRedirect(request.getContextPath() + redirectedPage);
+			}
+			else{
 			try {
 				if (gestoreprenotazione.checkDisponibita(numerocamera, datainizio, datafine)) {
 					gestorecarrello.insertCamera(email, numerocamera, datainizio, datafine,prezzo);
@@ -75,13 +80,14 @@ public class CarrelloServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			}
 		}
 		if(action.equalsIgnoreCase("delete")){
 			String email = (String) request.getSession().getAttribute("email");
 			int numerocamera = Integer.valueOf(request.getParameter("numerocamera"));
 			try {
 				gestorecarrello.deleteCamera(email, numerocamera);
-				String redirectedPage = "/carrello.jsp";
+				String redirectedPage = "/carrello?action=getcarrello";
 				response.sendRedirect(request.getContextPath() + redirectedPage);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -92,7 +98,7 @@ public class CarrelloServlet extends HttpServlet {
 			String email = (String) request.getSession().getAttribute("email");
 			try {
 				gestorecarrello.emptyCarrello(email);
-				String redirectedPage = "/carrello.jsp";
+				String redirectedPage = "/carrello?action=getcarrello";
 				response.sendRedirect(request.getContextPath() + redirectedPage);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

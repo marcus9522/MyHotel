@@ -34,7 +34,7 @@ public class GestoreCarrello implements CarrelloModel {
             preparedStatement2.setDate(2, datainizio);
             ResultSet rs = preparedStatement2.executeQuery();
             while (rs.next()) {
-                preparedStatement.setDouble(5, totale * rs.getDouble("DIFF"));
+                preparedStatement.setDouble(5, totale * (rs.getDouble("DIFF")+1));
 			}
 			preparedStatement.executeUpdate();
 

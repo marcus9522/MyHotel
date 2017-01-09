@@ -42,7 +42,7 @@ public class PrenotazioneServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-            doPost(request,response);
+		doPost(request, response);
 	}
 
 	/**
@@ -53,16 +53,17 @@ public class PrenotazioneServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String action = request.getParameter("action");
 		if (action.equalsIgnoreCase("insert")) {
-			//int idprenotazione = Integer.valueOf(request.getParameter("idprenotazione"));
+			// int idprenotazione =
+			// Integer.valueOf(request.getParameter("idprenotazione"));
 			String email = (String) request.getSession().getAttribute("email");
 			Collection<CarrelloBean> camerecarrello = new LinkedList<CarrelloBean>();
 			try {
 				camerecarrello = gestorecarrello.getCarrelloUtente(email);
 				Iterator<?> it = camerecarrello.iterator();
-				while (it.hasNext()) {					
+				while (it.hasNext()) {
 					CarrelloBean camera = (CarrelloBean) it.next();
-					PrenotazioneBean bean = new PrenotazioneBean(0, email, camera.getTotale(),
-					camera.getDatainizio(), camera.getDatafine(), camera.getNumerocamera());
+					PrenotazioneBean bean = new PrenotazioneBean(0, email, camera.getTotale(), camera.getDatainizio(),
+							camera.getDatafine(), camera.getNumerocamera());
 					gestoreprenotazione.insertPrenotazione(bean);
 					gestorecarrello.deleteCamera(email, camera.getNumerocamera());
 				}
@@ -99,35 +100,49 @@ public class PrenotazioneServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 		if (action.equalsIgnoreCase("getprenotazioni")) {
-			request.removeAttribute("prenotazioni");
+			request.removeAttribute("prenotazioniall");
 			try {
-				request.setAttribute("prenotazioni", gestoreprenotazione.getPrenotazioni());
+				request.setAttribute("prenotazioniall", gestoreprenotazione.getPrenotazioni());
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/gestisciprenotazioni.jsp");
 			dispatcher.forward(request, response);
 		}
 		if (action.equalsIgnoreCase("getprenotazioniuser")) {
 			request.removeAttribute("prenotazioni");
 			request.removeAttribute("camere");
-			String email = (String) request.getSession().getAttribute("email");
+			String email = request.getParameter("email");
+			String ruolo = (String) request.getSession().getAttribute("ruolo");
 			Collection<PrenotazioneBean> prenotazioni = new LinkedList<PrenotazioneBean>();
 			Collection<CameraBean> camere = new LinkedList<CameraBean>();
 			try {
 				prenotazioni = gestoreprenotazione.getPrenotazioniUtente(email);
-				request.setAttribute("prenotazioni", prenotazioni );
-				for (PrenotazioneBean p : prenotazioni){
-				camere.add(visualizzatorecamera.getCamera(p.getNumerocamera()));}
-				request.setAttribute("camere", camere );
-				
+				request.setAttribute("prenotazioni", prenotazioni);
+				for (PrenotazioneBean p : prenotazioni) {
+					camere.add(visualizzatorecamera.getCamera(p.getNumerocamera()));
+				}
+				request.setAttribute("camere", camere);
+
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/prenotazioniutente.jsp");
-			dispatcher.forward(request, response);
+			if (ruolo.equals("user")) {
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/prenotazioniutente.jsp");
+				dispatcher.forward(request, response);
+			} else if (ruolo.equals("admin")) {
+				request.removeAttribute("prenotazioniall");
+				try {
+					request.setAttribute("prenotazioniall", gestoreprenotazione.getPrenotazioni());
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/gestisciprenotazioni.jsp");
+				dispatcher.forward(request, response);
+			}
 		}
 	}
 

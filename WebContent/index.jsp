@@ -30,7 +30,7 @@
     <div id="filtro" align="center">
     <p>Filtra le camere disponibili</p>
     </div>
-    <form action="">
+    <form action="camera?action=filtra" method="post">
     <div class=filtracamere align=center>
     <div align=center><label>TIPOLOGIA:</label>
 		<select name="tipologia">
@@ -40,11 +40,12 @@
 	     <option value="Suite">Suite</option>	     
 	     </select><br></div>
     <div align=center><label>PREZZO MINIMO:&nbsp&nbsp&nbsp</label> 
-		<input name="min"  type="number" min=0  ><br></div>
+		<input name="min"  type="number" min=0 value=0 ><br></div>
 <div align=center><label>PREZZO MASSIMO:</label> 
-		<input name="max"  type="number" min=0 ><br>
+		<input name="max"  type="number" min=0 value=0><br>
 		<div align=center><label>ORDINA PER:</label>
 		<select name="order">
+		<option value="NUMEROCAMERA">Numerocamera</option>
 		<option value="prezzo">Prezzo</option>
          <option value="tipologia">Tipologia</option>     
 	     </select><br></div>
