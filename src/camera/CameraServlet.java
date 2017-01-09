@@ -50,7 +50,7 @@ public class CameraServlet extends HttpServlet {
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/catalogo.jsp");
 			dispatcher.forward(request, response);
 		}
-		doPost(request,response);
+		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -65,11 +65,19 @@ public class CameraServlet extends HttpServlet {
 			String[] servizi = request.getParameterValues("servizi");
 			CameraBean bean = new CameraBean(numerocamera, tipologia, immagine, prezzo, descrizione);
 			try {
-				String redirectedPage = "";
-				response.sendRedirect(request.getContextPath() + redirectedPage);
-				gestorecamera.insertCamera(bean);
-				for (String s : servizi)
-					gestoreservizi.insertServizioCamera(s, numerocamera);
+				if ((gestorecamera.checknumero(numerocamera)).equals("notfound")) {
+					String redirectedPage = "/gestiscicamere.jsp";
+					response.sendRedirect(request.getContextPath() + redirectedPage);
+					gestorecamera.insertCamera(bean);
+					if (servizi != null && servizi.length > 0) {
+						for (int i = 0; i < servizi.length; i++)
+							gestoreservizi.insertServizioCamera(servizi[i], numerocamera);
+					}
+				} else {
+					String redirectedPage = "/camera?action=getservizi&done=no";
+					response.sendRedirect(request.getContextPath() + redirectedPage);
+				}
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -112,7 +120,7 @@ public class CameraServlet extends HttpServlet {
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/camera.jsp");
 			dispatcher.forward(request, response);
 		}
-		if (action.equalsIgnoreCase("filtra")){
+		if (action.equalsIgnoreCase("filtra")) {
 			request.removeAttribute("camere");
 			double min = Double.valueOf(request.getParameter("min"));
 			double max = Double.valueOf(request.getParameter("max"));
@@ -127,7 +135,7 @@ public class CameraServlet extends HttpServlet {
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/catalogo.jsp");
 			dispatcher.forward(request, response);
 		}
-		if(action.equalsIgnoreCase("getServizi")){
+		if (action.equalsIgnoreCase("getservizi")) {
 			request.removeAttribute("servizi");
 			try {
 				request.setAttribute("servizi", gestoreservizi.getServizi());
@@ -135,9 +143,8 @@ public class CameraServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/inseriscicamera.jsp");
 			dispatcher.forward(request, response);
 		}
 	}
 }
-

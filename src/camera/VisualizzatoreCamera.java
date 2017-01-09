@@ -109,7 +109,7 @@ public class VisualizzatoreCamera implements VisualizzatoreCameraModel {
 				first = false;
 			} else
 				selectSQL += " AND ";
-			selectSQL += " TIPOLOGIA = " + tipologia;
+			selectSQL += "TIPOLOGIA='"+ tipologia +"'";
 		}
 		if (order != null && !order.equals("")) {
 			selectSQL += " ORDER BY " + order;

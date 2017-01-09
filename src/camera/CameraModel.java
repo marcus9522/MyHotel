@@ -8,4 +8,6 @@ public interface CameraModel {
 	public void deleteCamera(int numerocamera) throws SQLException;
 
 	public void modifyCamera(CameraBean camera) throws SQLException;
+
+	public String checknumero(int numerocamera) throws SQLException;
 }
