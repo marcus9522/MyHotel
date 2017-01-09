@@ -30,12 +30,14 @@ Collection<?> servizi = (Collection<?>) request.getAttribute("servizi");%>
     <!-- Custom Fonts -->
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <script src="javascript/info.js"></script>
 </head>
 <body>
 <script type="text/javascript">
 var site = window.location.href
 if(site.indexOf("add=yes")!=-1) {alert("Camera aggiunta al carrello")}
 if(site.indexOf("add=no")!=-1) {alert("Camera non disponiblie nel periodo stabilito")}
+if(site.indexOf("error=yes")!=-1) {alert("Non è possibile prenotare la camera per meno di 24 ore")}
 </script>
 <%if(ruolo==null){%>
 <%@ include file="nav.jsp" %>
@@ -74,9 +76,9 @@ if(site.indexOf("add=no")!=-1) {alert("Camera non disponiblie nel periodo stabil
 	                    <%}else if (ruolo.equals("user")){  %>
 	                    <form action="carrello?action=insert" method = "post">
 	                    <label for="data">DATA INIZIO PRENOTAZIONE:</label> 
-		                <input name="datainizio" type="date" value =<%=new java.sql.Date(System.currentTimeMillis()) %>   required ><br>			
+		                <input name="datainizio" type="date" id="data" value =<%=new java.sql.Date(System.currentTimeMillis()) %> min = <%=new java.sql.Date(System.currentTimeMillis()) %> onchange="date()" required ><br>			
 		                <label for="data">DATA FINE PRENOTAZIONE:</label> 
-		                <input name="datafine" type="date" required ><br>
+		                <input name="datafine" type="date" id="data2" required onclick="date()" ><br>
 		                <input name="numerocamera" type="number" value=<%=camera.getNumeroCamera() %> hidden="yes" >				
 		                <input name="prezzo" type="number" value=<%=camera.getPrezzo() %> hidden="yes" >
 		                <label for ="servizi">SERVIZI DISPONIBILI:</label><br>

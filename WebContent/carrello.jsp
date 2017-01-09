@@ -73,6 +73,7 @@
       <%}  %>
       </div>
 <div align=center>
+<h3>TOTALE: <%=totale %> &euro;</h1>
 <a href="carrello?action=empty"><button>Svuota Carrello</button></a>
 </div>
 <br>

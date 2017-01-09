@@ -49,7 +49,7 @@
                         <a href="camera?action=getcamere">Catalogo</a>
                     </li>
                     <li>
-                        <a href="login.jsp">Area Amministratore</a>
+                        <a href="areaamministratore.jsp">Area Amministratore</a>
                     </li>
                     <li>
                         <a href="utente?action=logout">Logout</a>

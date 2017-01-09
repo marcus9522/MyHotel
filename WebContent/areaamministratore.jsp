@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page contentType="text/html; charset=ISO-8859-1" import="java.util.*,utente.UtenteBean"%>
-<%String email = (String) session.getAttribute("email");
+<%String ruolo = (String) session.getAttribute("ruolo");
+String email = (String) session.getAttribute("email");
   String esito = (String) request.getAttribute("esito");%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -49,11 +50,11 @@ if(site.indexOf("esito=yes")!=-1) {alert("Operazione effettuata correttamente")}
         <!-- Team Members -->
             <div class="col-md-4 text-center">
                 <div class="thumbnail">
-                    <a href="prenotazione?action=getprenotazioniuser">
+                    <a href="prenotazione?action=getprenotazioni">
                     <img class="img-responsive" src="https://cdn2.iconfinder.com/data/icons/clipboard-2/100/clipboard2-512.png" alt="">
                     </a>
                     <div class="caption">
-                        <h3>Prenotazioni utenti<br>
+                        <h3>Gestione Prenotazioni<br>
                         </h3>
                         <p>In questa sezione potrai visualizzare lo storico prenotazioni effettuate dagli utenti</p>
                         </ul>
@@ -62,25 +63,25 @@ if(site.indexOf("esito=yes")!=-1) {alert("Operazione effettuata correttamente")}
             </div>
             <div class="col-md-4 text-center">
                 <div class="thumbnail">
-                   <a href="utente?action=getuser">
+                   <a href="gestiscicamere.jsp">
                     <img class="img-responsive" src="foto/edit1600.png" alt="">
                     </a>
                     <div class="caption">
-                        <h3>Modifica Dati<br>
+                        <h3>Gestione Camere<br>
                         </h3>
-                        <p>In questa sezione potrai visualizzare e modificare i dati delle camere</p>
+                        <p>In questa sezione potrai gestire le camere presenti nel database</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 text-center">
                 <div class="thumbnail">
-                    <a href="utente?action=delete">
+                    <a href="utente?action=getusers&email=<%=email%>">
                     <img class="img-responsive" src="foto/right-red-x.png" alt="">
                     </a>
                     <div class="caption">
-                        <h3>Elimina Profilo<br>
+                        <h3>Gestione Utenti<br>
                         </h3>
-                        <p>Premendo qui potrai eliminare uno degli utenti presenti nel database. </p>
+                        <p>In questa sezione potrai gestire gli utenti. </p>
                     </div>
                 </div>
             </div>

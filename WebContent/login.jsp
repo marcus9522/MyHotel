@@ -25,7 +25,7 @@ potrete godere di ogni servizio di questa piattaforma.<br> Grazie per averci sce
 <div align="center">
 	<form action="utente?action=login" method="post">
 		<label><b>Email&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</b></label>
-    <input id="login" type="text" placeholder="Enter email" name="email" required>
+    <input id="Login" type="text" placeholder="Enter email" name="email" required>
 	<br>
     <label><b>Password&nbsp</b></label>
     <input id="Login" type="password" placeholder="Enter Password" name="password" required>

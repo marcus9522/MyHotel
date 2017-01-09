@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page contentType="text/html; charset=ISO-8859-1" import="java.util.*,camera.CameraBean"%>
-    <%String email= (String) session.getAttribute("email");
+    <%String ruolo= (String) session.getAttribute("ruolo");
 Collection<?> camere = (Collection<?>) request.getAttribute("camere");%>
 <!DOCTYPE html >
 <html>
@@ -29,11 +29,15 @@ Collection<?> camere = (Collection<?>) request.getAttribute("camere");%>
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<%if(email == null){ %>
-   <%@ include file ="nav.jsp" %>
-   <%}else{  %>
-   <%@ include file ="navprotected.jsp" %>
-   <%} %>
+<%if(ruolo==null){%>
+<%@ include file="nav.jsp" %>
+<%} 
+ else if(ruolo.equals("user")){%>
+<%@ include file="navprotected.jsp" %>
+<%} 
+ else if(ruolo.equals("admin")){%>
+<%@ include file="navadmin.jsp" %>
+<%}  %>
 <div class="container">
            <h2 class="page-header">Filtra</h2>
            <%@ include file ="filtra.jsp" %>
@@ -54,7 +58,7 @@ Collection<?> camere = (Collection<?>) request.getAttribute("camere");%>
 					
 					<div class="col-md-4 text-center">
 	                <div class="thumbnail">
-	                <a href="camera?action=getcamere&numeroCamera=<%=bean.getNumeroCamera()%>">
+	                <a href="camera?action=getcamera&numerocamera=<%=bean.getNumeroCamera()%>">
 	                    <img class="img-responsive" src="<%=bean.getImmagine()%>" alt="">
 	                    </a>
 	                    <div class="caption">
