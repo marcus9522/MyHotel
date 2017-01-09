@@ -113,7 +113,7 @@ public class UtenteServlet extends HttpServlet {
 					response.sendRedirect(request.getContextPath() + redirectedPage);
 					gestoreutente.modifyUtente(bean);					
 				} else if (request.getSession().getAttribute("ruolo").equals("admin")) {
-					String redirectedPage = "";
+					String redirectedPage = "/utente?action=getusers&email="+email;
 					response.sendRedirect(request.getContextPath() + redirectedPage);
 					gestoreutente.modifyUtente(bean);
 				}
@@ -123,15 +123,16 @@ public class UtenteServlet extends HttpServlet {
 			}
 		}
 		if (action.equalsIgnoreCase("delete")) {
-			String email = (String) request.getSession().getAttribute("email");
+			String email = request.getParameter("email");
+			String email2 = (String) request.getSession().getAttribute("email");
 			try {
 				if (request.getSession().getAttribute("ruolo").equals("user")) {
 					String redirectedPage = "/index.jsp";
 					request.getSession().invalidate();
 					response.sendRedirect(request.getContextPath() + redirectedPage);
-					gestoreutente.deleteUtente(email);
+					gestoreutente.deleteUtente(email2);
 				} else if (request.getSession().getAttribute("ruolo").equals("admin")) {
-					String redirectedPage = "";
+					String redirectedPage = "/utente?action=getusers&email="+email2;
 					response.sendRedirect(request.getContextPath() + redirectedPage);
 					gestoreutente.deleteUtente(email);
 				}
@@ -141,14 +142,17 @@ public class UtenteServlet extends HttpServlet {
 			}
 		}
 		if (action.equals("getusers")) {
+			request.removeAttribute("utenti");
 			request.removeAttribute("utente");
+			String email = request.getParameter("email");
 			try {
 				request.setAttribute("utenti", gestoreutente.getUtenti());
+                request.setAttribute("utente", gestoreutente.getUtente(email));
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/gestisciutenti.jsp");
 			dispatcher.forward(request, response);
 		}
 		if (action.equals("getuser")) {

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -77,8 +76,7 @@ public class GestoreUtente implements UtenteModel {
 		String updateSQL = " UPDATE " + GestoreUtente.TABLE_NAME
 				+ " SET EMAIL = ?, PASSWORD = ?, RUOLO = ?, NOME = ?, COGNOME = ?, DATA_NASCITA = ?"
 				+ " WHERE EMAIL = ? ";
-		System.out.println(updateSQL);
-		System.out.println(utente.getPassword());
+
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(updateSQL);
@@ -141,26 +139,15 @@ public class GestoreUtente implements UtenteModel {
 		// tabella utenti
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		ArrayList<String> Email = new ArrayList<String>();
-		String selectSQL = "SELECT " + GestoreUtente.TABLE_NAME + ".EMAIL FROM " + GestoreUtente.TABLE_NAME;
+		String selectSQL = "SELECT * FROM " + GestoreUtente.TABLE_NAME + " WHERE EMAIL = ?";
 		boolean found = false;
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
-
+			preparedStatement.setString(1, email);
 			ResultSet rs = preparedStatement.executeQuery();
-			while (rs.next()) {
-				Email.add(rs.getString("EMAIL"));
-			}
-			if (Email != null && Email.size() != 0) {
-				Iterator<String> it = Email.iterator();
-				while (it.hasNext()) {
-					if (it.next().equals(email)) {
-						found = true;
-						break;
-					}
-				}
-			}
+			if (rs.next())
+				found = true;
 		}
 
 		finally {
