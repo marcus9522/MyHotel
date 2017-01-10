@@ -52,7 +52,7 @@ Collection<?> camere = (Collection<?>) request.getAttribute("camere");%>
             int i=0;
 			if (camere != null && camere.size() != 0) {
 				Iterator<?> it = camere.iterator();
-				while (it.hasNext()&& i<5) {
+				while (it.hasNext()&& i<6) {
 					CameraBean bean = (CameraBean) it.next();
 					%>
 					

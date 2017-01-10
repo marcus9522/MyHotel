@@ -19,8 +19,6 @@ Collection<?> servizi = (Collection<?>) request.getAttribute("servizi");%>
     <meta name="description" content="">
     <meta name="author" content="">
     
-    <link href="css/my.css" rel="stylesheet">
-
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -37,7 +35,7 @@ Collection<?> servizi = (Collection<?>) request.getAttribute("servizi");%>
 var site = window.location.href
 if(site.indexOf("add=yes")!=-1) {alert("Camera aggiunta al carrello")}
 if(site.indexOf("add=no")!=-1) {alert("Camera non disponiblie nel periodo stabilito")}
-if(site.indexOf("error=yes")!=-1) {alert("Non è possibile prenotare la camera per meno di 24 ore")}
+if(site.indexOf("error=yes")!=-1) {alert("Range di date non valido")}
 </script>
 <%if(ruolo==null){%>
 <%@ include file="nav.jsp" %>
@@ -76,9 +74,9 @@ if(site.indexOf("error=yes")!=-1) {alert("Non è possibile prenotare la camera pe
 	                    <%}else if (ruolo.equals("user")){  %>
 	                    <form action="carrello?action=insert" method = "post">
 	                    <label for="data">DATA INIZIO PRENOTAZIONE:</label> 
-		                <input name="datainizio" type="date" id="data" value =<%=new java.sql.Date(System.currentTimeMillis()) %> min = <%=new java.sql.Date(System.currentTimeMillis()) %> onchange="date()" required ><br>			
+		                <input name="datainizio" type="date" id="data" value =<%=new java.sql.Date(System.currentTimeMillis()) %> min = <%=new java.sql.Date(System.currentTimeMillis()) %>  required ><br>			
 		                <label for="data">DATA FINE PRENOTAZIONE:</label> 
-		                <input name="datafine" type="date" id="data2" required onclick="date()" ><br>
+		                <input name="datafine" type="date" id="data2" required  min="date()"><br>
 		                <input name="numerocamera" type="number" value=<%=camera.getNumeroCamera() %> hidden="yes" >				
 		                <input name="prezzo" type="number" value=<%=camera.getPrezzo() %> hidden="yes" >
 		                <label for ="servizi">SERVIZI DISPONIBILI:</label><br>

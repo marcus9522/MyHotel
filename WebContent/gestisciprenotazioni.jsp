@@ -34,12 +34,20 @@ Collection<?> prenotazioni = (Collection<?>) request.getAttribute("prenotazioni"
 <select onChange="info(this.value)">
 <option> Scegli un utente </option>
   <%Iterator<?> it = prenotazioniall.iterator();
-     while(it.hasNext()){
-     PrenotazioneBean bean = (PrenotazioneBean) it.next();%>
-     	
-  <option value="<%=bean.getEmail()%>"> <%=bean.getEmail()%></option>
-  
-<%} } %>
+  ArrayList<String> email = new ArrayList<String>();
+  boolean x;   
+  while(it.hasNext()){
+	 x = false;
+     PrenotazioneBean bean = (PrenotazioneBean) it.next();
+     for(int i=0;i<email.size();i++) 
+    	 if(email.get(i).equals(bean.getEmail())){
+    		 x=true;
+    		 break;
+    	 }
+     email.add(email.size(),bean.getEmail());
+     if(x == false){%>
+  <option value="<%=bean.getEmail()%>"> <%=bean.getEmail()%></option>  
+<%} } } %>
 </select>
 </div>
 <%if (prenotazioni != null && prenotazioni.size() != 0) { 
