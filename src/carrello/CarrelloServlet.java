@@ -62,7 +62,7 @@ public class CarrelloServlet extends HttpServlet {
 			Date datainizio = Date.valueOf(request.getParameter("datainizio"));
 			Date datafine = Date.valueOf(request.getParameter("datafine"));
 			double prezzo = Double.valueOf(request.getParameter("prezzo"));
-			if(datainizio.equals(datafine)){
+			if((datainizio.equals(datafine))||(datainizio.after(datafine))||(datafine.before(datainizio))){
 				String redirectedPage = "/camera?action=getcamera&numerocamera="+numerocamera+"&error=yes";
 				response.sendRedirect(request.getContextPath() + redirectedPage);
 			}
