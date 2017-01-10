@@ -68,7 +68,7 @@ public class GestoreCamera implements CameraModel {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String updateSQL = "UPDATE " + GestoreCamera.TABLE_NAME
-				+ "SET NUMEROCAMERA = ?, PREZZO = ?, TIPOLOGIA = ?, IMMAGINE = ?, DESCRIZIONE = ?"
+				+ " SET NUMEROCAMERA = ?, PREZZO = ?, TIPOLOGIA = ?, IMMAGINE = ?, DESCRIZIONE = ?"
 				+ " WHERE NUMEROCAMERA = ? ";
 		try {
 			connection = DriverManagerConnectionPool.getConnection();

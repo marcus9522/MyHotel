@@ -21,7 +21,7 @@ public class CameraServlet extends HttpServlet {
 	static CameraModel gestorecamera;
 	static VisualizzatoreCameraModel visualizzatorecamera;
 	static ServizioModel gestoreservizi;
-
+    
 	static {
 		gestorecamera = new GestoreCamera();
 		visualizzatorecamera = new VisualizzatoreCamera();
@@ -40,6 +40,7 @@ public class CameraServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getParameter("action");
+		String ruolo = (String) request.getSession().getAttribute("ruolo");
 		if (action.equalsIgnoreCase("getcamere")) {
 			request.removeAttribute("camere");
 			try {
@@ -47,14 +48,27 @@ public class CameraServlet extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			if(ruolo!=null){
+			if(ruolo.equals("admin")){
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/modificacamera.jsp");
+				dispatcher.forward(request, response);
+			}
+			if(ruolo.equals("user")){
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/catalogo.jsp");
+				dispatcher.forward(request, response);
+			}
+			}
+			else {
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/catalogo.jsp");
 			dispatcher.forward(request, response);
+			}
 		}
 		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String ruolo = (String) request.getSession().getAttribute("ruolo");
 		String action = request.getParameter("action");
 		if (action.equalsIgnoreCase("insert")) {
 			int numerocamera = Integer.valueOf(request.getParameter("numerocamera"));
@@ -86,7 +100,7 @@ public class CameraServlet extends HttpServlet {
 			int numerocamera = Integer.valueOf(request.getParameter("numerocamera"));
 			try {
 				gestorecamera.deleteCamera(numerocamera);
-				String redirectedPage = "";
+				String redirectedPage = "/camera?action=getcamere";
 				response.sendRedirect(request.getContextPath() + redirectedPage);
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -117,8 +131,21 @@ public class CameraServlet extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			if(ruolo.equals("admin")){
+				try {
+					request.removeAttribute("camere");
+					request.setAttribute("camere", visualizzatorecamera.getCamere());
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/modificacamera.jsp");
+				dispatcher.forward(request, response);
+			}
+			else{
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/camera.jsp");
 			dispatcher.forward(request, response);
+			}
 		}
 		if (action.equalsIgnoreCase("filtra")) {
 			request.removeAttribute("camere");
