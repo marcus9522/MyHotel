@@ -12,9 +12,12 @@ public interface PrenotazioneModel {
 	public PrenotazioneBean getPrenotazione(int idPrenotazione) throws SQLException;
 
 	public Collection<PrenotazioneBean> getPrenotazioni() throws SQLException;
-	
+
 	public Collection<PrenotazioneBean> getPrenotazioniUtente(String email) throws SQLException;
-	
+
 	public boolean checkDisponibita(int numerocamera, Date datainizio, Date datafine) throws SQLException;
+
+	public Collection<PrenotazioneBean> filtraprenotazioni(String periodo, String order, double totalemin,
+			double totalemax) throws SQLException;
 
 }

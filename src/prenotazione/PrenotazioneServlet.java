@@ -53,13 +53,23 @@ public class PrenotazioneServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String action = request.getParameter("action");
 		if (action.equalsIgnoreCase("insert")) {
-			// int idprenotazione =
-			// Integer.valueOf(request.getParameter("idprenotazione"));
+			boolean free = true;
 			String email = (String) request.getSession().getAttribute("email");
 			Collection<CarrelloBean> camerecarrello = new LinkedList<CarrelloBean>();
 			try {
 				camerecarrello = gestorecarrello.getCarrelloUtente(email);
 				Iterator<?> it = camerecarrello.iterator();
+				Iterator<?> it2 = camerecarrello.iterator();
+				while(it2.hasNext()){
+					CarrelloBean camera = (CarrelloBean) it2.next();
+					if(gestoreprenotazione.checkDisponibita(camera.getNumerocamera(), camera.getDatainizio(), camera.getDatafine())== false){
+						free = false;
+						String redirectedPage = "/carrello?action=getcarrello&occupata="+camera.getNumerocamera();
+						response.sendRedirect(request.getContextPath() + redirectedPage);
+						break;
+					}
+				}
+				if(free == true){
 				while (it.hasNext()) {
 					CarrelloBean camera = (CarrelloBean) it.next();
 					PrenotazioneBean bean = new PrenotazioneBean(0, email, camera.getTotale(), camera.getDatainizio(),
@@ -69,11 +79,11 @@ public class PrenotazioneServlet extends HttpServlet {
 				}
 				String redirectedPage = "";
 				response.sendRedirect(request.getContextPath() + redirectedPage);
+				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 		}
 		if (action.equalsIgnoreCase("delete")) {
 			int idprenotazione = Integer.valueOf(request.getParameter("idprenotazione"));
@@ -143,6 +153,29 @@ public class PrenotazioneServlet extends HttpServlet {
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/gestisciprenotazioni.jsp");
 				dispatcher.forward(request, response);
 			}
+		}
+		if(action.equalsIgnoreCase("filtra")){
+			request.removeAttribute("prenotazioni");
+			request.removeAttribute("camere");
+			String periodo = request.getParameter("periodo");
+			String order = request.getParameter("order");
+			double totalemin = Double.valueOf(request.getParameter("totalemin"));
+			double totalemax = Double.valueOf(request.getParameter("totalemax"));
+			Collection<PrenotazioneBean> prenotazioni = new LinkedList<PrenotazioneBean>();
+			Collection<CameraBean> camere = new LinkedList<CameraBean>();
+			try {
+				prenotazioni = gestoreprenotazione.filtraprenotazioni(periodo, order, totalemin, totalemax);
+				request.setAttribute("prenotazioni", prenotazioni);
+				for (PrenotazioneBean p : prenotazioni) {
+					camere.add(visualizzatorecamera.getCamera(p.getNumerocamera()));
+				}
+				request.setAttribute("camere", camere);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/filtraprenotazioni.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 
