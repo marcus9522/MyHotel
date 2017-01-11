@@ -119,7 +119,7 @@ public class GestorePrenotazione implements PrenotazioneModel {
 				bean.setDatafine(rs.getDate("DATAFINE"));
 				prenotazioni.add(bean);
 			}
-  
+
 		} finally {
 			try {
 				if (preparedStatement != null)
@@ -169,20 +169,23 @@ public class GestorePrenotazione implements PrenotazioneModel {
 	public boolean checkDisponibita(int numerocamera, Date datainizio, Date datafine) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String selectSQL = "SELECT * FROM " + GestorePrenotazione.TABLE_NAME + " WHERE (DATAINIZIO BETWEEN DATE ? AND DATE ? OR DATAFINE BETWEEN DATE ? AND DATE ?) OR (DATE ? BETWEEN DATAINIZIO AND DATAFINE OR DATE ? BETWEEN DATAINIZIO AND DATAFINE) AND NUMEROCAMERA = ?";
+		String selectSQL = "SELECT * FROM " + GestorePrenotazione.TABLE_NAME
+				+ " WHERE NUMEROCAMERA = ? AND ((DATAINIZIO BETWEEN DATE ? AND DATE ? OR DATAFINE BETWEEN DATE ? AND DATE ?) OR (DATE ? BETWEEN DATAINIZIO AND DATAFINE OR DATE ? BETWEEN DATAINIZIO AND DATAFINE))";
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
-			preparedStatement.setDate(1, datainizio);
-			preparedStatement.setDate(2, datafine);
-			preparedStatement.setDate(3, datainizio);
-			preparedStatement.setDate(4, datafine);
-			preparedStatement.setDate(5, datainizio);
-			preparedStatement.setDate(6, datafine);
-			preparedStatement.setInt(7, numerocamera);
+			preparedStatement.setInt(1, numerocamera);
+			preparedStatement.setDate(2, datainizio);
+			preparedStatement.setDate(3, datafine);
+			preparedStatement.setDate(4, datainizio);
+			preparedStatement.setDate(5, datafine);
+			preparedStatement.setDate(6, datainizio);
+			preparedStatement.setDate(7, datafine);
 			ResultSet rs = preparedStatement.executeQuery();
-			if(rs.first()) return false;
-			else return true;
+			if (rs.next())
+				return false;
+			else
+				return true;
 
 		} finally {
 			try {
@@ -192,5 +195,85 @@ public class GestorePrenotazione implements PrenotazioneModel {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
+	}
+
+	@Override
+	public Collection<PrenotazioneBean> filtraprenotazioni(String periodo, String order, double totalemin,
+			double totalemax) throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		boolean first = true;
+		Date today = new java.sql.Date(System.currentTimeMillis());
+		Collection<PrenotazioneBean> prenotazioni = new LinkedList<PrenotazioneBean>();
+		String selectSQL = "SELECT * FROM " + GestorePrenotazione.TABLE_NAME;
+		if (totalemin != 0) {
+			if (first == true) {
+				selectSQL += " WHERE ";
+				first = false;
+			} else
+				selectSQL += " AND ";
+			selectSQL += " TOTALE>= " + totalemin;
+		}
+		if (totalemax != 0) {
+			if (first == true) {
+				selectSQL += " WHERE ";
+				first = false;
+			} else
+				selectSQL += " AND ";
+			selectSQL += " TOTALE<= " + totalemax;
+		}
+		if (periodo.equals("TUTTI") == false) {
+			if (periodo.equals("TERMINATE")) {
+				if (first == true) {
+					selectSQL += " WHERE ";
+					first = false;
+				} else
+					selectSQL += " AND ";
+				selectSQL += " DATAFINE< '" + today +"'";
+			}
+			if (periodo.equals("INCORSO")) {
+				if (first == true) {
+					selectSQL += " WHERE ";
+					first = false;
+				} else
+					selectSQL += " AND ";
+				selectSQL += " DATAINIZIO<= '" + today + "'";
+				selectSQL += " AND ";
+				selectSQL += " DATAFINE>= '" + today + "'";
+			}
+			if (periodo.equals("FUTURE")) {
+				if (first == true) {
+					selectSQL += " WHERE ";
+					first = false;
+				} else
+					selectSQL += " AND ";
+				selectSQL += " DATAINIZIO> '" + today + "'";
+			}
+		}
+		selectSQL += " ORDER BY " + order;
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				PrenotazioneBean bean = new PrenotazioneBean();
+				bean.setIdprenotazione(rs.getInt("IDPRENOTAZIONE"));
+				bean.setEmail(rs.getString("EMAIL"));
+				bean.setNumerocamera(rs.getInt("NUMEROCAMERA"));
+				bean.setTotale(rs.getDouble("TOTALE"));
+				bean.setDatainizio(rs.getDate("DATAINIZIO"));
+				bean.setDatafine(rs.getDate("DATAFINE"));
+				prenotazioni.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+		return prenotazioni;
 	}
 }

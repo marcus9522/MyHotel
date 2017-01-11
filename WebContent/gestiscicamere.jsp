@@ -8,7 +8,7 @@ String email = (String) session.getAttribute("email");
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Area Amministratore</title>
+<title>Gestisci Camere</title>
 <head>
 
     <meta charset="utf-8">

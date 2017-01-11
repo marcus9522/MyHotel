@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    
+    <script src="javascript/info.js"></script>
     <link href="css/my.css" rel="stylesheet">
 
     <!-- Bootstrap Core CSS -->
@@ -30,8 +30,15 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
-
+<script type="text/javascript">
+var site = window.location.href
+if(site.indexOf("occupata")!=-1) {
+	var num =site.substring(67,69)
+	var msg= "Siamo spiacenti ma mentre completava la prenotazione la camera "
+	var final = msg.concat( num," e' stata prenotata da un altro utente.")
+	alert(final)
+}
+</script>
  <%@ include file ="navprotected.jsp" %>
  <%if(carrello!=null) 
  if(carrello.isEmpty()==false){%>
