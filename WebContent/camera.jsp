@@ -34,7 +34,7 @@ Collection<?> servizi = (Collection<?>) request.getAttribute("servizi");%>
 <script type="text/javascript">
 var site = window.location.href
 if(site.indexOf("add=yes")!=-1) {alert("Camera aggiunta al carrello")}
-if(site.indexOf("add=no")!=-1) {alert("Camera non disponiblie nel periodo stabilito")}
+if(site.indexOf("add=no")!=-1) {alert("Camera non disponibile nel periodo stabilito")}
 if(site.indexOf("error=yes")!=-1) {alert("Range di date non valido")}
 </script>
 <%if(ruolo==null){%>
@@ -70,7 +70,7 @@ if(site.indexOf("error=yes")!=-1) {alert("Range di date non valido")}
                 <b><p>PREZZO PER NOTTE: <%=camera.getPrezzo()%> &euro;</p></b>
             </div>
             <%if (ruolo==null) {%>
-	                    <div align="center"><a href="/login.jsp"><button>Effettua Il Login Per Prenotare Questa Camera</button></a></div>
+	                    <div align="center"><a href="login.jsp"><button>Effettua Il Login Per Prenotare Questa Camera</button></a></div>
 	                    <%}else if (ruolo.equals("user")){  %>
 	                    <form action="carrello?action=insert" method = "post">
 	                    <label for="data">DATA INIZIO PRENOTAZIONE:</label> 
@@ -88,7 +88,7 @@ if(site.indexOf("error=yes")!=-1) {alert("Range di date non valido")}
 					<br>
 					<input id="aggiungi" type="submit" value="Aggiungi al Carrello">
 					</form>
-	                    <%} else if(ruolo.equals("admin")){ %>
+	             
 	                    <%} %>
         </div>
         <!-- /.row -->
