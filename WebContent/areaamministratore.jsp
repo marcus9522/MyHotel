@@ -50,7 +50,7 @@ if(site.indexOf("esito=yes")!=-1) {alert("Operazione effettuata correttamente")}
         <!-- Team Members -->
             <div class="col-md-4 text-center">
                 <div class="thumbnail">
-                    <a href="prenotazione?action=getprenotazioni">
+                    <a href="prenotazioniadmin.jsp">
                     <img class="img-responsive" src="https://cdn2.iconfinder.com/data/icons/clipboard-2/100/clipboard2-512.png" alt="">
                     </a>
                     <div class="caption">
