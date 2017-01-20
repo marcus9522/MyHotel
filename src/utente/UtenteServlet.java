@@ -46,7 +46,6 @@ public class UtenteServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String action = request.getParameter("action");
 		if (action.equalsIgnoreCase("registrazione")) {
-			request.removeAttribute("done");
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			String ruolo = request.getParameter("ruolo");
@@ -56,16 +55,15 @@ public class UtenteServlet extends HttpServlet {
 			UtenteBean bean = new UtenteBean(email, password, nome, cognome, data_nascita, ruolo);
 			try {
 				if (gestoreutente.checkEmail(email) == false) {
-					request.setAttribute("done", "yes");
+					response.sendRedirect("index.jsp");
 					gestoreutente.insertUtente(bean);
 				} else
-					request.setAttribute("done", "no");
+					response.sendRedirect("registrazione.jsp");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/registrazione.jsp");
-			dispatcher.forward(request, response);
+		
 		}
 		if (action.equalsIgnoreCase("login")) {
 			String email = request.getParameter("email");
