@@ -10,9 +10,9 @@
 <div class="filtra" align=center  >
 <form action="prenotazione?action=filtra" method="post" >
 <label for="nome">MIN:</label>
-<input type="num" name="totalemin" required  min=0  value=0 width="5%" > 
+<input type="number" name="totalemin" required  min=0  value=0 width="5%" > 
 <label for="nome">MAX:</label>
-<input type="num" name="totalemax" required  value=0 width="5%" > 
+<input type="number" name="totalemax" required  value=0 width="5%" > 
 <small>Periodo: </small>
 <select name="periodo">
          <option value="TUTTI">Tutto</option>

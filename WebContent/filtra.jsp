@@ -15,9 +15,9 @@
 <div class="filtra" align=center  >
 <form action="camera?action=filtra" method="post" >
 <label for="nome">MIN:</label>
-<input type="num" name="min" required  min=0  value=0 width="5%" > 
+<input type="number" name="min" required  min=0  value=0 width="5%" > 
 <label for="nome">MAX:</label>
-<input type="num" name="max" required  value=0 width="5%" > 
+<input type="number" name="max" required  value=0 width="5%" > 
 <small>Tipologia: </small>
 <select name="tipologia">
          <option value="Tutte">Tutte</option>
