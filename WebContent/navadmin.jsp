@@ -45,7 +45,7 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 
-					<li><a href="camera?action=getcamere">Catalogo</a></li>
+					<li><a href="camera?action=getcamere">Gestisci Camere</a></li>
 					<li><a href="areaamministratore.jsp">Area Amministratore</a></li>
 					<li><a href="utente?action=logout">Logout</a></li>
 				</ul>
