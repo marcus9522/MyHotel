@@ -47,12 +47,6 @@ FOREIGN KEY (email) REFERENCES utente(email) ON DELETE CASCADE ON UPDATE CASCADE
 PRIMARY KEY(idprenotazione)
 );
 
-CREATE TABLE comprende(
-nomeservizio varchar(20) not null,
-idprenotazione int not null,
-FOREIGN KEY (idprenotazione) REFERENCES prenotazione(idprenotazione) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 
 CREATE TABLE hacarrello(
 email varchar(40) not null,
@@ -71,7 +65,7 @@ Insert into utente(email, password, ruolo, nome, cognome, data_nascita)
     Insert into utente(email, password, ruolo, nome, cognome, data_nascita)
     Values('email', 'password', 'normale', 'Gianluca', 'Criscuolo', '1989-05-14');
     Insert into utente(email, password, ruolo, nome, cognome, data_nascita)
-    Values('email2', 'password2', 'amministratore', 'Gianluca', 'Criscuolo', '1989-05-14');
+    Values('admin', 'admin', 'amministratore', 'Raffaele', 'Criscuolo', '1989-05-14');
 Insert into camera(numerocamera, prezzo, tipologia, immagine, descrizione)
     Values('24', '250.25', 'Doppia', 'http://www.hotelgalileopadova.it/resources/images/9d880762-0f9b-42e7-9379-d64e90526f10/it/B/camere-a-padova.jpg', 'Camera doppia,televisore, bagno con doccia e yacuzzi.');
 Insert into servizio(nomeservizio, descrizione)
@@ -80,7 +74,5 @@ Insert into ha(numerocamera, nomeservizio)
 	Values('24','wifi');
 Insert into prenotazione(idprenotazione, email, numerocamera, totale, datainizio, datafine)
 	Values('2056', 'alecriscuolo@alice.it', '24', '250.25', '2017-02-15', '2017-02-20');
-Insert into comprende(nomeservizio, idprenotazione)
-	Values('wifi','2056');
 Insert into hacarrello(email, numerocamera, datainizio, datafine, totale)
 	Values('alecriscuolo@alice.it', '24', '2017-02-15', '2017-02-20', '250.25');
