@@ -10,13 +10,20 @@ import java.util.Collection;
 import java.util.LinkedList;
 import connessione.DriverManagerConnectionPool;
 
-
-
 public class GestoreCarrello implements CarrelloModel {
 	private static final String TABLE_NAME = "hacarrello";
 	@Override
+
+	/**
+	 * 		Metodo che inserice una nuova camera all'interno del carrello con le date di inizio e fine prenotazione
+	 * @param email - la mail dell'utente che ha prenotato la camera
+	 * @param numercamera - il numero della camera scelta
+	 * @param datainizio - Data di inizio della prenotazione
+	 * @param datafine - Data di fine della prenotazione
+	 * @param totale - Totale della prenotazione
+	 */
+	
 	public synchronized void insertCamera(String email, int numerocamera, Date datainizio, Date datafine, double totale) throws SQLException {
-		//Metodo che inserice una nuova camera all'interno del carrello con le date di inizio e fine prenotazione
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		PreparedStatement preparedStatement2 = null;
@@ -48,7 +55,7 @@ public class GestoreCarrello implements CarrelloModel {
 			}
 		}
 	}
-
+   
 	@Override
 	public synchronized void deleteCamera(String email, int numerocamera) throws SQLException {
 		//Metodo che cancella una singola camera dal carrello
