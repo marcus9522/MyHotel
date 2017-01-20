@@ -53,17 +53,4 @@ i privilegi di essere un cliente di MyHotel!
   <input id="registra" type ="reset" value="Reset"/>	 
   </form>
 </div>
-<%if(done!=null){ 
-if(done.equalsIgnoreCase("no")){%>
-<script>
-alert("Email già presente nel database")
-history.go(-1);
-</script>
-<%} %>
-<% if(done.equalsIgnoreCase("yes")){%>
-<script>
-alert("Registrazione effettuata")
-</script> 
-<%}
-   }  %>
 </html>
