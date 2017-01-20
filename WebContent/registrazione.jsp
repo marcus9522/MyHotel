@@ -38,7 +38,7 @@ i privilegi di essere un cliente di MyHotel!
 <br>
 <h3></h3>
 <label for="email">E-Mail:</label><br> 
-		<input name="email" id="irec" type="text" maxlength="40" required placeholder="Inserisci e-mail" ><br>
+		<input name="email" id="irec" type="email" maxlength="40" required placeholder="Inserisci e-mail" ><br>
 <label for="password">Password:</label><br> 
 		<input name="password" id="irec" type="password" maxlength="20" required placeholder="Inserisci password"><br>
 		<input name="ruolo" id="irec" type="text" required value="normale" hidden="true">
