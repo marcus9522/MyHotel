@@ -111,7 +111,7 @@
            <div class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4><i class="fa fa-fw fa-compass"></i> Filtra le camere</h4>
+                        <h4><i class="fa fa-fw fa-home"></i> Filtra le camere</h4>
                     </div>
                     <div class="panel-body">
                          <p>Filtra le camere disponibili</p>
@@ -144,7 +144,7 @@
             <div class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4><i class="fa fa-fw fa-compass"></i> Scelta dei servizi</h4>
+                        <h4><i class="fa fa-fw fa-shopping-cart"></i> Scelta dei servizi</h4>
                     </div>
                     <div class="panel-body">
                         <p>Ogni camera dispone di una serie di servizi,l'utente può scegliere tra questi nella pagina dedicata alla visualizzazione della camera.</p>
