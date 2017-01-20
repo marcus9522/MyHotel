@@ -64,7 +64,7 @@ if(site.indexOf("esito=yes")!=-1) {alert("Operazione effettuata correttamente")}
             <div class="col-md-4 text-center">
                 <div class="thumbnail">
                    <a href="filtraprenotazioni.jsp">
-                    <img class="img-responsive" src="foto/edit1600.png" alt="">
+                    <img class="img-responsive" src="http://www.freeiconspng.com/uploads/filter-icon-14.png" alt="">
                     </a>
                     <div class="caption">
                         <h3>Filtra Prenotazioni<br>
@@ -76,7 +76,7 @@ if(site.indexOf("esito=yes")!=-1) {alert("Operazione effettuata correttamente")}
             <div class="col-md-4 text-center">
                 <div class="thumbnail">
                     <a href="areaamministratore.jsp">
-                    <img class="img-responsive" src="foto/right-red-x.png" alt="">
+                    <img class="img-responsive" src="http://www.free-icons-download.net/images/red-crystal-left-arrow-icon-36488.png" alt="">
                     </a>
                     <div class="caption">
                         <h3>Torna all'area amministratore<br>

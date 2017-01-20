@@ -76,7 +76,7 @@ if(site.indexOf("esito=yes")!=-1) {alert("Operazione effettuata correttamente")}
             <div class="col-md-4 text-center">
                 <div class="thumbnail">
                     <a href="utente?action=getusers&email=<%=email%>">
-                    <img class="img-responsive" src="foto/right-red-x.png" alt="">
+                    <img class="img-responsive" src="http://icon-icons.com/icons2/20/PNG/256/businessapplication_edit_male_user_thepencil_theclient_negocio_2321.png" alt="">
                     </a>
                     <div class="caption">
                         <h3>Gestione Utenti<br>
