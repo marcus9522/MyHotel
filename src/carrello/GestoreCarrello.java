@@ -57,8 +57,13 @@ public class GestoreCarrello implements CarrelloModel {
 	}
    
 	@Override
+	/**
+	 * Metodo che cancella una singola camera dal carrello
+	 * @param email - l'email dell'utente che deve cancellare la camera dal carrello
+	 * @param numerocamera - il numero della camera da cancellare
+	 */
 	public synchronized void deleteCamera(String email, int numerocamera) throws SQLException {
-		//Metodo che cancella una singola camera dal carrello
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String deleteSQL = "DELETE FROM " + GestoreCarrello.TABLE_NAME + " WHERE EMAIL = ? AND NUMEROCAMERA = ?";
@@ -81,8 +86,12 @@ public class GestoreCarrello implements CarrelloModel {
 	}
 
 	@Override
+	/**
+	 * Metodo che restituisce tutti gli id delle camere presenti all'interno del carrello
+	 * @param email - L'email dell'utente 
+	 * @return id camera
+	 */
 	public synchronized ArrayList<Integer> getIdCamereCarrello(String email) throws SQLException {
-		//Metodo che restituisce tutti gli id delle camere presenti all'interno del carrello
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ArrayList<Integer> idcamere = new ArrayList<Integer>();
@@ -108,8 +117,12 @@ public class GestoreCarrello implements CarrelloModel {
 	}
 
 	@Override
+	/**
+	 * Metodo che restituisce datainizio e datafine delle camere presenti all'interno del carrello
+	 * @param email - L'email dell'utente
+	 * @return dataInizio e dataFine
+	 */
 	public synchronized Collection<CarrelloBean> getCarrelloUtente(String email) throws SQLException {
-		// Metodo che restituisce datainizio e data fine delle camere presenti all'interno del carrello
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		Collection<CarrelloBean> carrello = new LinkedList<CarrelloBean>();
@@ -141,8 +154,11 @@ public class GestoreCarrello implements CarrelloModel {
 	}
 
 	@Override
+	/**
+	 * Metodo che elimina ogni camera presente all'interno del carrello dell'utente
+	 * @param email - L'email dell'utente
+	 */
 	public synchronized void emptyCarrello(String email) throws SQLException {
-		//Metodo che elimina ogni camera presente all'interno del carrello dell'utente
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String deleteSQL = "DELETE FROM " + GestoreCarrello.TABLE_NAME + " WHERE EMAIL = ?";
