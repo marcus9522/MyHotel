@@ -14,8 +14,12 @@ public class GestoreUtente implements UtenteModel {
 	private static final String TABLE_NAME = "utente";
 
 	@Override
+	/**
+	 * Metodo per l'inserimento di un nuovo utente all'interno del database
+	 * @param utente - L'utente da inserire nel database
+	 */
 	public synchronized void insertUtente(UtenteBean utente) throws SQLException {
-		// Metodo per l'inserimento di un nuovo utente all'interno del database
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -44,9 +48,12 @@ public class GestoreUtente implements UtenteModel {
 	}
 
 	@Override
+	/**
+	 * Metodo per la cancellazione di un utente presente all'interno del database tramite la sua chiave primaria
+	 * @param email - L'email dell'utente che deve essere eliminato
+	 */
 	public synchronized void deleteUtente(String email) throws SQLException {
-		// Metodo per la cancellazione di un utente presente all'interno del
-		// database tramite la sua chiave primaria
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -69,8 +76,12 @@ public class GestoreUtente implements UtenteModel {
 	}
 
 	@Override
+	/**
+	 * Metodo per la modifica di un utente presente all'interno del database
+	 * @param utente - L'utente da modificare
+	 */
 	public synchronized void modifyUtente(UtenteBean utente) throws SQLException {
-		// Metodo per la modifica di un utente presente all'interno del database
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String updateSQL = " UPDATE " + GestoreUtente.TABLE_NAME
@@ -101,9 +112,12 @@ public class GestoreUtente implements UtenteModel {
 	}
 
 	@Override
+	/**
+	 * Metodo per visualizzare i dati di un utente individuato tramite la sua chiave primaria
+	 * @param email - L'email dell'utente i cui dati devono essere visualizzati
+	 */
 	public synchronized UtenteBean getUtente(String email) throws SQLException {
-		// Metodo per visualizzare i dati di un utente individuato tramite la
-		// sua chiave primaria
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		UtenteBean bean = new UtenteBean();
@@ -134,9 +148,12 @@ public class GestoreUtente implements UtenteModel {
 	}
 
 	@Override
+	/**
+	 * Metodo per verificare se un email è gia presente all'interno della tabella utenti
+	 * @param email - L'email su cui effettuare il controllo
+	 */
 	public synchronized boolean checkEmail(String email) throws SQLException {
-		// Metodo per verificare se un email è gia presente all'interno della
-		// tabella utenti
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String selectSQL = "SELECT * FROM " + GestoreUtente.TABLE_NAME + " WHERE EMAIL = ?";
@@ -162,9 +179,12 @@ public class GestoreUtente implements UtenteModel {
 	}
 
 	@Override
+	/**
+	 * Metodo che restituisce le informazioni di tutti gli utenti presenti all'interno del database
+	 * @return Tutti i dati degli utenti(email,password,ruolo,nome,cognome,data di nascita)
+	 */
 	public synchronized Collection<UtenteBean> getUtenti() throws SQLException {
-		// Metodo che restituisce le informazioni di tutti gli utenti presenti
-		// all'interno del database
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		Collection<UtenteBean> utenti = new LinkedList<UtenteBean>();
@@ -196,9 +216,13 @@ public class GestoreUtente implements UtenteModel {
 	}
 
 	@Override
+	/**
+	 * Metodo che controlla se email e password inserite hanno un riscontro nel database
+	 * @param email - L'email inserita su cui effettuare il controllo
+	 * @param password - La password inserita su cui effettuare il controllo
+	 */
 	public synchronized String login(String email, String password) throws SQLException {
-		// Metodo che controlla se email e password inserite hanno un riscontro
-		// nel database
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		Collection<UtenteBean> user = new LinkedList<UtenteBean>();
