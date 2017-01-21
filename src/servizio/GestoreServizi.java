@@ -14,8 +14,12 @@ public class GestoreServizi implements ServizioModel {
 	private static final String TABLE_NAME2 = "ha";
 
 	@Override
+	/**
+	 * Metodo che restituisce tutti i servizi disponibili
+	 * @return Servizio
+	 */
 	public synchronized Collection<ServizioBean> getServizi() throws SQLException {
-		// Metodo che restituisce tutti i servizi disponibili
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		Collection<ServizioBean> servizi = new LinkedList<ServizioBean>();
@@ -43,9 +47,13 @@ public class GestoreServizi implements ServizioModel {
 	}
 
 	@Override
+	/**
+	 * Metodo che restituisce tutti i servizi disponibili per una certa camera identificata dal suo numero
+	 * @param numeroCamera - Il numero della camera scelta
+	 * @return Servizi disponibili per la camera scelta
+	 */
 	public synchronized Collection<ServizioBean> getServiziCamera(int numeroCamera) throws SQLException {
-		// Metodo che restituisce tutti i servizi disponibili per una certa
-		// camera identificata dal suo numero
+		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		Collection<ServizioBean> servizi = new LinkedList<ServizioBean>();
@@ -74,9 +82,13 @@ public class GestoreServizi implements ServizioModel {
 	}
 
 	@Override
+	/**
+	 * Metodo che inserisce un servizio ad una camera, il servizio sarà scelto fra quelli disponibili
+	 * param nomeservizio - Il servizio che deve essere aggiunto ad una camera
+	 * @param numerocamera - Il numero della camera scelta
+	 */
 	public synchronized void insertServizioCamera(String nomeservizio, int numerocamera) throws SQLException {
-		// Metodo che inserisce un servizio ad una camera, il servizio sarà
-		// scelto fra quelli disponibili
+	
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String insertSQL = "INSERT INTO " + GestoreServizi.TABLE_NAME2 + " (NUMEROCAMERA, NOMESERVIZIO) VALUES (?, ?) ";
