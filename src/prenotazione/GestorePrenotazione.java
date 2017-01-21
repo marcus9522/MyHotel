@@ -14,9 +14,11 @@ public class GestorePrenotazione implements PrenotazioneModel {
 	private static final String TABLE_NAME = "prenotazione";
 
 	@Override
+	/**
+	 * Metodo per l'inserimento di una nuova prenotazione nel database e della creazione dell'associazione con la relativa camera
+	 * @param prenotazione - La prenotazione da inserire nel database
+	 */
 	public synchronized void insertPrenotazione(PrenotazioneBean prenotazione) throws SQLException {
-		// Metodo per l'inserimento di una nuova prenotazione nel database e
-		// della creazione dell'associazione con la relativa camera
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String insertSQL = "INSERT INTO " + GestorePrenotazione.TABLE_NAME
@@ -42,8 +44,11 @@ public class GestorePrenotazione implements PrenotazioneModel {
 	}
 
 	@Override
+	/**
+	 * Metodo che elimina una prenotazione all'interno del database
+	 * @param idPrenotazione - La chiave della prenotazione da eliminare
+	 */
 	public synchronized void deletePrenotazione(int idPrenotazione) throws SQLException {
-		// Metodo che elimina una prenotazione all'interno del database
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -66,8 +71,12 @@ public class GestorePrenotazione implements PrenotazioneModel {
 	}
 
 	@Override
+	/**
+	 * Metodo che restituisce i dati di una prenotazione tramite il suo ID
+	 * @param idPrenotazione - La chiave della prenotazione
+	 * @return Dati della prenotazione
+	 */
 	public synchronized PrenotazioneBean getPrenotazione(int idPrenotazione) throws SQLException {
-		// Metodo che restituisce i dati di una prenotazione tramite il suo ID
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		PrenotazioneBean bean = new PrenotazioneBean();
@@ -98,9 +107,11 @@ public class GestorePrenotazione implements PrenotazioneModel {
 	}
 
 	@Override
+	/**
+	 * Metodo che restituisce tutte le prenotazioni presenti all'interno del database
+	 * @return Tutte le prenotazioni effettuate dai clienti presenti nel database, con relativi dati
+	 */
 	public synchronized Collection<PrenotazioneBean> getPrenotazioni() throws SQLException {
-		// Metodo che restituisce tutte le prenotazioni presenti all'interno del
-		// database
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		Collection<PrenotazioneBean> prenotazioni = new LinkedList<PrenotazioneBean>();
@@ -131,9 +142,12 @@ public class GestorePrenotazione implements PrenotazioneModel {
 		return prenotazioni;
 	}
 
+	/**
+	 * Metodo che restituisce le prenotazione di un determinato utente identificato tramite la sua email
+	 * @param email - L'email dell'utente
+	 * @return Le prenotazioni effettuate dall'utente
+	 */
 	public synchronized Collection<PrenotazioneBean> getPrenotazioniUtente(String email) throws SQLException {
-		// Metodo che restituisce le prenotazione di un determinato utente
-		// identificato tramite la sua email
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		Collection<PrenotazioneBean> prenotazioni = new LinkedList<PrenotazioneBean>();
@@ -166,6 +180,14 @@ public class GestorePrenotazione implements PrenotazioneModel {
 	}
 
 	@Override
+	/**
+	 *  Metodo per controllora se una camera è disponibile in un certo periodo
+	 *  @param numerocamera - Il numero della camera da controllare
+	 *  @param datainizio - La data di inizio del periodo da controllare
+	 *  @param datafine - La data di fine del periodo da controllare
+	 *  @return True se la camera è disponibile
+	 *	@return False se la camera non è disponibile
+	 */
 	public boolean checkDisponibita(int numerocamera, Date datainizio, Date datafine) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -198,6 +220,14 @@ public class GestorePrenotazione implements PrenotazioneModel {
 	}
 
 	@Override
+	/**
+	 * Metodo per il filtraggio delle prenotazioni
+	 * @param periodo - Il periodo di cui si vogliono recuperare le prenotazioni
+	 * @param order -  Il tipo di ordinamento scelto
+	 * @param totalemin - Il prezzo minimo 
+	 * @param totalemax - Il prezzo massimo
+	 * @return Le prenotazioni in base ai dati inseriti nel filtraggio
+	 */
 	public Collection<PrenotazioneBean> filtraprenotazioni(String periodo, String order, double totalemin,
 			double totalemax) throws SQLException {
 		Connection connection = null;
