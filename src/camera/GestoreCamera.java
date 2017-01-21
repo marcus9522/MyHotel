@@ -10,8 +10,11 @@ public class GestoreCamera implements CameraModel {
 	private static final String TABLE_NAME = "camera";
 
 	@Override
+	/**
+	 * Metodo per l'inserimento di una nuova camera all'interno del database
+	 * @param camera - La camera da aggiungere all'interno del database
+	 */
 	public synchronized void insertCamera(CameraBean camera) throws SQLException {
-		// Metodo per l'inserimento di una nuova camera all'interno del database
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String insertSQL = "INSERT INTO " + GestoreCamera.TABLE_NAME
@@ -38,9 +41,11 @@ public class GestoreCamera implements CameraModel {
 	}
 
 	@Override
+	/**
+	 * Metodo per la cancellazione di una camera dal database tramite la sua chiave primaria
+	 * @param numerocamera - Il numero della camera da cancellare
+	 */
 	public synchronized void deleteCamera(int numerocamera) throws SQLException {
-		// Metodo per la cancellazione di una camera dal database tramite la sua
-		// chiave primaria
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String deleteSQL = "DELETE FROM " + GestoreCamera.TABLE_NAME + " WHERE NUMEROCAMERA = ?";
@@ -62,9 +67,11 @@ public class GestoreCamera implements CameraModel {
 	}
 
 	@Override
+	/**
+	 * Metodo per la modifica dei dati di una camera gia' esistente all'interno del database
+	 * @param camera - La camera i cui dati dovranno essere modificati
+	 */
 	public synchronized void modifyCamera(CameraBean camera) throws SQLException {
-		// Metodo per la modifica dei dati di una camera gia' esistente
-		// all'interno del database
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String updateSQL = "UPDATE " + GestoreCamera.TABLE_NAME
@@ -92,6 +99,12 @@ public class GestoreCamera implements CameraModel {
 		}
 	}
 
+	/**
+	 * Metodo per la ricerca di una camera all'interno del database
+	 * @param numerocamera - Il numero della camera da cercare
+	 * @return Found se la camera è stata trovata
+	 * @return NotFound se la camera non è stata trovata
+	 */
 	public synchronized String checknumero(int numerocamera) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
