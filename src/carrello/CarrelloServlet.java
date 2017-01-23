@@ -70,7 +70,7 @@ public class CarrelloServlet extends HttpServlet {
 			try {
 				if (gestoreprenotazione.checkDisponibita(numerocamera, datainizio, datafine)) {
 					gestorecarrello.insertCamera(email, numerocamera, datainizio, datafine,prezzo);
-					String redirectedPage = "/camera?action=getcamera&numerocamera="+numerocamera+"&add=yes";
+					String redirectedPage = "/carrello?action=getcarrello";
 					response.sendRedirect(request.getContextPath() + redirectedPage);
 				} else {
 					String redirectedPage = "/camera?action=getcamera&numerocamera="+numerocamera+"&add=no";

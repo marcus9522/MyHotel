@@ -55,24 +55,10 @@
 		<input name="datanascita" id="irec" type="date" value="<%=bean.getDataNascita()%>" max="<%=new java.sql.Date(System.currentTimeMillis()) %>" required ><br>			
 		<input name="ruolo" id="irec" type="text" value="normale" hidden = "true"><br>
 		<p></p>
-   <input id="registra" type="submit" value="Invia">
-  <input id="registra" type ="reset" value="Reset"/>	 
+   <input id="modifica" type="submit" value="Invia">
   </form>
 </div>
 </div>
 </div>
-<%if(done!=null){ 
-if(done.equalsIgnoreCase("true")){%>
-<script>
-alert("Email già presente nel database")
-history.go(-1);
-</script>
-<%} %>
-<% if(done.equalsIgnoreCase("false")){%>
-<script>
-alert("Registrazione effettuata")
-</script> 
-<%}
-   }  %>
 </body>
 </html>

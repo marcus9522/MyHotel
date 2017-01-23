@@ -55,8 +55,9 @@ public class UtenteServlet extends HttpServlet {
 			UtenteBean bean = new UtenteBean(email, password, nome, cognome, data_nascita, ruolo);
 			try {
 				if (gestoreutente.checkEmail(email) == false) {
-					response.sendRedirect("index.jsp");
 					gestoreutente.insertUtente(bean);
+					response.sendRedirect("index.jsp");
+
 				} else
 					response.sendRedirect("registrazione.jsp");
 			} catch (SQLException e) {

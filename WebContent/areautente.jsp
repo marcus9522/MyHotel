@@ -26,10 +26,6 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
     
-<script type="text/javascript">
-var site = window.location.href
-if(site.indexOf("esito=yes")!=-1) {alert("Operazione effettuata correttamente")}
-</script>
 </head>
 <body>
 

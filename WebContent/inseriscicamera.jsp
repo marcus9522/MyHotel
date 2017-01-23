@@ -58,13 +58,13 @@ Iterator<?> it = servizi.iterator();
 <br>
    <input id="registra" type="submit" value="Invia">
   </form>
+  <p id="no">
 </div>
 </body> 
 <script>
 var site = window.location.href
 if(site.indexOf("done=no")!=-1) {
-alert("Numero camera già presente")
-history.go(-1);
+	document.getElementById("no").innerHTML = "NumeroCamera già presente";
 }
 </script>
 </html>
