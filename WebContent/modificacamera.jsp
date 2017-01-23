@@ -51,7 +51,6 @@ String ruolo = (String) session.getAttribute("ruolo");
 <div class="registrazione" align=center> 
 <form action="camera?action=update" name="modificacamera" method="post">
 <br>
-<label >NumeroCamera:</label><br> 
 <input name="numerocamera" type="number" required value ="<%=camera.getNumeroCamera()%>" hidden="true" ><br>
 <label>Prezzo:</label><br> 
 <input name="prezzo" type="number"  required value="<%=camera.getPrezzo() %>" ><br>
