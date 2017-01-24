@@ -37,13 +37,13 @@ potrete godere di ogni servizio di questa piattaforma.<br> Grazie per averci sce
 <br><br>
 <p id="loginP" align=center>Se non sei ancora registrato affrettati per usufruire di ogni
 	nostro servizio! <a href="registrazione.jsp">Clicca qui!</a></p>
+
 </body>
 <%done=request.getParameter("done"); %>
 <%if(done!=null){ 
 if(done.equalsIgnoreCase("no")){%>
 <script>
-alert("Email e/o password errati")
-history.go(-1)
+document.getElementById("loginP").innerHTML = "Email e/o password errati";
 </script>
 <%} } %>
 </html>

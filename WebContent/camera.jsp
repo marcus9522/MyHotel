@@ -30,12 +30,7 @@ Collection<?> servizi = (Collection<?>) request.getAttribute("servizi");%>
     <script src="javascript/info.js"></script>
 </head>
 <body>
-<script type="text/javascript">
-var site = window.location.href
-if(site.indexOf("add=yes")!=-1) {alert("Camera aggiunta al carrello")}
-if(site.indexOf("add=no")!=-1) {alert("Camera non disponibile nel periodo stabilito")}
-if(site.indexOf("error=yes")!=-1) {alert("Range di date non valido")}
-</script>
+
 <%if(ruolo==null){%>
 <%@ include file="nav.jsp" %>
 <%} 
@@ -70,7 +65,7 @@ if(site.indexOf("error=yes")!=-1) {alert("Range di date non valido")}
             </div>
             <%if (ruolo==null) {%>
 	                    <div align="center"><a href="login.jsp"><button>Effettua Il Login Per Prenotare Questa Camera</button></a></div>
-	                    <%}else if (ruolo.equals("user")){  %>
+	                    <%} %>
 	                    <form action="carrello?action=insert" method = "post">
 	                    <label for="data">DATA INIZIO PRENOTAZIONE:</label> 
 		                <input name="datainizio" type="date" id="data" value =<%=new java.sql.Date(System.currentTimeMillis()) %> min = <%=new java.sql.Date(System.currentTimeMillis()) %>  required ><br>			
@@ -85,10 +80,16 @@ if(site.indexOf("error=yes")!=-1) {alert("Range di date non valido")}
 					<input type="checkbox" name="servizio" value= "<%=servizio.getNome()%>"><%=servizio.getNome().toUpperCase() %>
 					<%} %>
 					<br>
+					<% if (ruolo.equals("user")){  %>
 					<input id="aggiungi" type="submit" value="Aggiungi al Carrello">
 					</form>
-	             
 	                    <%} %>
+	    <p id="no"></p>
+	     <script type="text/javascript">
+var site = window.location.href
+if(site.indexOf("add=no")!=-1) {document.getElementById("no").innerHTML = "Camera Occupata nel periodo scelto";}
+if(site.indexOf("error=yes")!=-1) {document.getElementById("no").innerHTML = "Range di date non valido";}
+</script>               
         </div>
         <!-- /.row -->
 
