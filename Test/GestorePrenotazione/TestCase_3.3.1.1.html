@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>TestEffettuaPrenotazione</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">TestEffettuaPrenotazione</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/MyHotel/index.jsp</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Catalogo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//img[contains(@src,'http://static.wynnlasvegas.com/~/media/WLV/Rooms%20and%20Suites/Encore%20Tower%20Suites/Salon%20Suite/2_129_encore_salon_suite_bedroom.jpg?h=540&amp;la=en&amp;w=1001&amp;vs=1&amp;d=20141205T181759')])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=data</td>
+	<td>2017-01-23</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=data2</td>
+	<td>2017-01-30</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=servizio</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=aggiungi</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=intcarta</td>
+	<td>Mario Rossi</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=ncarta</td>
+	<td>0123456789</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=date</td>
+	<td>2010-10-10</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>xpath=(//input[@name='ncarta'])[2]</td>
+	<td>596</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=carrello</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/MyHotel/</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

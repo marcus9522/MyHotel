@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8080/" />
+<title>TestModificaDatiUtenteAmministratore</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">TestModificaDatiUtenteAmministratore</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/MyHotel/index.jsp</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Area Amministratore</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[contains(@src,'http://icon-icons.com/icons2/20/PNG/256/businessapplication_edit_male_user_thepencil_theclient_negocio_2321.png')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>css=select</td>
+	<td>label=test@email.it</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=nome</td>
+	<td>test2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=cognome</td>
+	<td>test2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=registra</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://localhost:8080/MyHotel/utente?action=getusers&amp;email=email@email.it</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
