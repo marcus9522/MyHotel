@@ -68,7 +68,6 @@ public class CameraServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String ruolo = (String) request.getSession().getAttribute("ruolo");
-		System.out.println(ruolo);
 		String action = request.getParameter("action");
 		if (action.equalsIgnoreCase("insert")) {
 			int numerocamera = Integer.valueOf(request.getParameter("numerocamera"));
