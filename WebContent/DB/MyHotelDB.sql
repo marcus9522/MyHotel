@@ -71,13 +71,13 @@ Insert into utente(email, password, ruolo, nome, cognome, data_nascita)
 Insert into utente(email, password, ruolo, nome, cognome, data_nascita)
     Values('mail@mail.it', 'mail', 'normale', 'Francesco', 'Nota', '1995-02-15');
 Insert into camera(numerocamera, prezzo, tipologia, immagine, descrizione)
-    Values('24', '250.25', 'Doppia', 'http://www.hotelclodio.it/sites/hotelclodio.gisnet.it/files/Camera-Doppia_HOTEL_CLODIO_ROMA.jpg', 'Camera doppia,televisore, bagno con doccia e yacuzzi.');
+	Values('7', '190', 'Doppia', 'http://www.hotelclodio.it/sites/hotelclodio.gisnet.it/files/Camera-Doppia_HOTEL_CLODIO_ROMA.jpg', 'Camera con televisore led, bagno con doccia e yacuzzi');
 Insert into camera(numerocamera, prezzo, tipologia, immagine, descrizione)
-	Values('7', '190.50', 'Doppia', 'http://www.hoteldeicongressiroma.com/wp-content/uploads/2013/11/doppia02.jpg', 'Camera doppia,televisore, bagno con doccia e yacuzzi.');
+    Values('24', '250', 'Doppia', 'http://www.hotelclodio.it/sites/hotelclodio.gisnet.it/files/Camera-Doppia_HOTEL_CLODIO_ROMA.jpg', 'Camera doppia,televisore, bagno con doccia e yacuzzi.');
 Insert into camera(numerocamera, prezzo, tipologia, immagine, descrizione)
-	Values('32', '170.90', 'Singola', 'http://d38nr4x52y6vub.cloudfront.net/_novaimg/galleria/659141.jpg', 'Camera singola con televisore.');
+	Values('32', '170', 'Singola', 'http://d38nr4x52y6vub.cloudfront.net/_novaimg/galleria/659141.jpg', 'Camera singola con televisore.');
 Insert into camera(numerocamera, prezzo, tipologia, immagine, descrizione)
-	Values('17', '300.90','Suite', 'http://photos.mandarinoriental.com/is/image/MandarinOriental/las-vegas-suite-emperor-suite-bedroom-2?$DetailBannerHeight$', 'Suite con televisore, bagno con doccia e yacuzzi');
+	Values('17', '300','Suite', 'http://photos.mandarinoriental.com/is/image/MandarinOriental/las-vegas-suite-emperor-suite-bedroom-2?$DetailBannerHeight$', 'Suite con televisore, bagno con doccia e yacuzzi');
 Insert into servizio(nomeservizio, descrizione)
 	Values('wifi', 'Con questa opzione si potrà avere libero accesso all utilizzo della rete wifi dell hotel');
 Insert into servizio(nomeservizio, descrizione)
@@ -87,16 +87,46 @@ Insert into servizio(nomeservizio, descrizione)
 Insert into servizio(nomeservizio, descrizione)
 	Values('Palestra', 'Con questa opzione si potrà avere libero accesso alla zona gym');
 Insert into ha(numerocamera, nomeservizio)
+	Values('7','wifi');
+Insert into ha(numerocamera, nomeservizio)
+	Values('7','frigobar');
+Insert into ha(numerocamera, nomeservizio)
+	Values('7','sala massaggi');
+Insert into ha(numerocamera, nomeservizio)
+	Values('7','palestra');
+Insert into ha(numerocamera, nomeservizio)
 	Values('24','wifi');
+Insert into ha(numerocamera, nomeservizio)
+	Values('24','frigobar');
+Insert into ha(numerocamera, nomeservizio)
+	Values('24','sala massaggi');
+Insert into ha(numerocamera, nomeservizio)
+	Values('24','palestra');
+Insert into ha(numerocamera, nomeservizio)
+	Values('17','wifi');
+Insert into ha(numerocamera, nomeservizio)
+	Values('17','palestra');
+Insert into ha(numerocamera, nomeservizio)
+	Values('17','frigobar');
+Insert into ha(numerocamera, nomeservizio)
+	Values('17','sala massaggi');
+Insert into ha(numerocamera, nomeservizio)
+	Values('32','wifi');
+Insert into ha(numerocamera, nomeservizio)
+	Values('32','palestra');
+Insert into ha(numerocamera, nomeservizio)
+	Values('32','frigobar');
+Insert into ha(numerocamera, nomeservizio)
+	Values('32','sala massaggi');
 Insert into prenotazione(idprenotazione, email, numerocamera, totale, datainizio, datafine)
-	Values('2056', 'gianlucacriscuolo@alice.it', '24', '750.75', '2017-01-05', '2017-01-07');
+	Values('2056', 'gianlucacriscuolo@alice.it', '24', '750', '2017-01-05', '2017-01-07');
 Insert into prenotazione(idprenotazione, email, numerocamera, totale, datainizio, datafine)
-	Values('2057', 'marcus2295@gmail.it', '7', '952.50', '2017-01-05', '2017-01-09');
+	Values('2057', 'marcus2295@gmail.it', '7', '760', '2017-01-05', '2017-01-09');
 Insert into prenotazione(idprenotazione, email, numerocamera, totale, datainizio, datafine)
-	Values('2058', 'user@email.it', '32', '170.90', '2017-01-09','2017-01-10');
+	Values('2058', 'user@email.it', '32', '170', '2017-01-09','2017-01-10');
 Insert into hacarrello(email, numerocamera, datainizio, datafine, totale)
-	Values('gianlucacriscuolo@alice.it', '24', '2017-01-05', '2017-01-07', '750.75');
+	Values('gianlucacriscuolo@alice.it', '24', '2017-01-05', '2017-01-07', '750');
 Insert into hacarrello(email, numerocamera, datainizio, datafine, totale)
-	Values('marcus2295@gmail.it', '7', '2017-01-05', '2017-01-09', '952.50');
+	Values('marcus2295@gmail.it', '24', '2017-01-20', '2017-01-25', '750');
 Insert into hacarrello(email, numerocamera, datainizio, datafine, totale)
-	Values('user@email.it', '32', '2017-01-09', '2017-01-10', '170.90');
+	Values('user@email.it', '32', '2017-01-09', '2017-01-10', '170');
