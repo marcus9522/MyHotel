@@ -74,14 +74,18 @@ Collection<?> servizi = (Collection<?>) request.getAttribute("servizi");%>
 		                <input name="numerocamera" type="number" value=<%=camera.getNumeroCamera() %> hidden="yes" >				
 		                <input name="prezzo" type="number" value=<%=camera.getPrezzo() %> hidden="yes" >
 		                <label for ="servizi">SERVIZI DISPONIBILI:</label><br>
-		                <% Iterator<?> it = servizi.iterator();
+		                <% 
+		                if(!(servizi.isEmpty())){
+		                Iterator<?> it = servizi.iterator();
 		                while (it.hasNext()) {
 					ServizioBean servizio = (ServizioBean) it.next();%>
 					<input type="checkbox" name="servizio" value= "<%=servizio.getNome()%>"><%=servizio.getNome().toUpperCase() %>
-					<%} %>
+					<%} } %>
 					<br>
+					<%if(ruolo!=null){ %>
 					<% if (ruolo.equals("user")){  %>
 					<input id="aggiungi" type="submit" value="Aggiungi al Carrello">
+					<%} %>
 					</form>
 	                    <%} %>
 	    <p id="no"></p>

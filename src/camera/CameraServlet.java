@@ -68,6 +68,7 @@ public class CameraServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String ruolo = (String) request.getSession().getAttribute("ruolo");
+		System.out.println(ruolo);
 		String action = request.getParameter("action");
 		if (action.equalsIgnoreCase("insert")) {
 			int numerocamera = Integer.valueOf(request.getParameter("numerocamera"));
@@ -130,27 +131,25 @@ public class CameraServlet extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			if (ruolo != null) {
-				if (ruolo.equals("admin")) {
-					try {
-						request.removeAttribute("camere");
-						request.setAttribute("camere", visualizzatorecamera.getCamere());
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/modificacamera.jsp");
-					dispatcher.forward(request, response);
+			if (ruolo == null) {
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/camera.jsp");
+				dispatcher.forward(request, response);
+			} else if (ruolo.equals("admin")) {
+				try {
+					request.removeAttribute("camere");
+					request.setAttribute("camere", visualizzatorecamera.getCamere());
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				if (ruolo.equals("user")) {
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/camera.jsp");
-					dispatcher.forward(request, response);
-				}
-			} else {
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/modificacamera.jsp");
+				dispatcher.forward(request, response);
+			} else if (ruolo.equals("user")) {
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/camera.jsp");
 				dispatcher.forward(request, response);
 			}
 		}
+
 		if (action.equalsIgnoreCase("filtra")) {
 			request.removeAttribute("camere");
 			double min = Double.valueOf(request.getParameter("min"));
